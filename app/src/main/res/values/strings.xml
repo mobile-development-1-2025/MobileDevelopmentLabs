@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Мессенджер</string>
+    <string name="news_title">Новости</string>
+    <string name="profile_title">Профиль</string>
+    <string name="settings_title">Настройки</string>
+    <string name="news_content">Новостная лента\n\nЗдесь будут отображаться новости и сообщения</string>
+    <string name="profile_name">Иван Иванов</string>
+    <string name="profile_email">ivan.ivanov@example.com</string>
+    <string name="profile_status">В сети</string>
+    <string name="dark_theme">Темная тема</string>
+</resources>
