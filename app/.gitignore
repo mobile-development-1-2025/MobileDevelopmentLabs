@@ -1,0 +1,89 @@
+# Android / Gradle build
+.gradle/
+**/.gradle/
+**/build/
+.idea/
+local.properties
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.ap_
+*.aab
+*.aar
+
+# Android Studio / IntelliJ
+.idea/
+*.iml
+*.iws
+*.ipr
+/.idea/*
+*.sublime-workspace
+*.sublime-project
+
+# Keystores / Signing
+*.jks
+*.keystore
+*.pem
+*.p12
+*.key
+key.properties
+
+# Env / Config
+.env
+*.env
+*.local
+*.properties.local
+
+# Logs / Reports
+*.log
+log/
+logs/
+*.stacktrace
+hs_err_pid*
+
+# OS files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+*.swp
+*.tmp
+
+# Gradle Wrapper (keep scripts only)
+!gradle/wrapper/gradle-wrapper.properties
+!gradle/wrapper/gradle-wrapper.jar
+gradlew.bat
+gradlew
+
+# Unit tests / coverage
+*.ec
+*.coverage
+coverage/
+test-results/
+
+# Temporary / local tools
+.idea/deploymentTargetDropDown.xml
+.idea/assetWizardSettings.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/caches/
+.idea/libraries/
+
+# Build caches / intermediates
+**/intermediates/
+**/outputs/
+**/generated/
+
+# Misc
+/app/release/
+app-release.apk
+*.orig
+*.rej
+
+# GitHub / CI artifacts
+*.zip
+*.tar.gz
+*.7z
+/build-outputs/
