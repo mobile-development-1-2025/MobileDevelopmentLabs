@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/newsFragment">
+
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="com.example.messenger.ui.news.NewsFragment"
+        android:label="Лента" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.messenger.ui.profile.ProfileFragment"
+        android:label="Профиль" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.messenger.ui.settings.SettingsFragment"
+        android:label="Настройки" />
+</navigation>

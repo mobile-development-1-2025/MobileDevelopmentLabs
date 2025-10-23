@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Messenger</string>
+
+    <string name="news_title">Новостная лента</string>
+    <string name="news_content">Новости :)</string>
+
+    <string name="user_name">Иван Иванов</string>
+    <string name="user_email">ivan@example.com</string>
+    <string name="user_status">В сети</string>
+    <string name="avatar_description">Аватар</string>
+
+    <string name="settings_title">Настройки</string>
+    <string name="dark_theme_label">Темная тема</string>
+    <string name="theme_light">Тема: Светлая</string>
+    <string name="theme_dark">Тема: Темная</string>
+
+    <string name="nav_news">Лента</string>
+    <string name="nav_profile">Профиль</string>
+    <string name="nav_settings">Настройки</string>
+</resources>
