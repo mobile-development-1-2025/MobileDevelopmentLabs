@@ -10,9 +10,11 @@ import android.content.Context
 import com.example.messenger.databinding.FragmentSettingsBinding
 import android.content.SharedPreferences
 import com.example.messenger.R
+import com.example.messenger.MainActivity
 
 class SettingsFragment: Fragment() {
     private lateinit var binding: FragmentSettingsBinding
+    private lateinit var themeManager: ThemeManager
     private lateinit var prefs: SharedPreferences
     private val tag: String = "Settings"
 
@@ -22,7 +24,6 @@ class SettingsFragment: Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        prefs = requireContext().getSharedPreferences(prefs_name, Context.MODE_PRIVATE)
         Log.d(tag, "onCreate: Fragment создан")
     }
 
@@ -40,7 +41,12 @@ class SettingsFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Log.d(tag, "onViewCreated: View создан")
 
-        applyChanges()
+        val context = requireContext()
+        prefs = context.getSharedPreferences(prefs_name, Context.MODE_PRIVATE)
+        themeManager = ThemeManager(context)
+
+        setup()
+        loadSettings()
     }
 
     override fun onStart() {
@@ -48,41 +54,50 @@ class SettingsFragment: Fragment() {
         Log.d(tag, "onStart: Fragment запущен")
     }
 
-    private fun applyChanges() {
+    private fun setup() {
         binding.notificationsSwitch.setOnCheckedChangeListener { _, isChecked ->
             prefs.edit().putBoolean("notifications", isChecked).apply()
         }
 
         binding.themeRadioGroup.setOnCheckedChangeListener { _, checkedId ->
-            val theme = when (checkedId) {
-                R.id.theme_light -> "light"
-                R.id.theme_dark -> "dark"
-                else -> "system"
+            val newTheme = when (checkedId) {
+                R.id.theme_light -> ThemeManager.THEME_LIGHT
+                R.id.theme_dark -> ThemeManager.THEME_DARK
+                R.id.theme_system -> ThemeManager.THEME_SYSTEM
+                else -> ThemeManager.THEME_SYSTEM
             }
-            prefs.edit().putString("theme", theme).apply()
+
+            themeManager.currentTheme = newTheme
         }
 
         binding.resetSettingsButton.setOnClickListener {
             resetSettings()
+        }
+
+        binding.saveSettingsButton.setOnClickListener {
+            themeManager.applyTheme()
+            (activity as? MainActivity)?.onThemeChanged()
         }
     }
 
     private fun loadSettings() {
         binding.notificationsSwitch.isChecked = prefs.getBoolean("notifications", true)
 
-        when (prefs.getString("theme", "system")) {
+        when (themeManager.currentTheme) {
             "light" -> binding.themeLight.isChecked = true
             "dark" -> binding.themeDark.isChecked = true
             else -> binding.themeSystem.isChecked = true
         }
+
     }
 
     private fun resetSettings() {
         with(prefs.edit()) {
             putBoolean("notifications", true)
-            putString("theme", "system")
             apply()
         }
+        themeManager.currentTheme = ThemeManager.THEME_SYSTEM
+        themeManager.applyTheme()
         loadSettings()
     }
 }

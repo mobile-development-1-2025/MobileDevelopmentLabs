@@ -36,30 +36,4 @@ class NewsFragment: Fragment() {
         super.onStart()
         Log.d(tag, "onStart: Fragment запущен")
     }
-
-//    override fun onResume() {
-//        super.onResume()
-//        Log.d(TAG, "onResume: Fragment возобновлён")
-//    }
-//
-//    override fun onPause() {
-//        super.onPause()
-//        Log.d(TAG, "onPause: Fragment приостановлен")
-//    }
-//
-//    override fun onStop() {
-//        super.onStop()
-//        Log.d(TAG, "onStop: Fragment остановлен")
-//    }
-//
-//    override fun onDestroyView() {
-//        super.onDestroyView()
-//        Log.d(TAG, "onDestroyView: View уничтожен")
-//        _binding = null
-//    }
-//
-//    override fun onDestroy() {
-//        super.onDestroy()
-//        Log.d(TAG, "onDestroy: Fragment уничтожен")
-//    }
 }
