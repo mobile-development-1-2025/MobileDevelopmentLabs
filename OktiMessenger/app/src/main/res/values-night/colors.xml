@@ -1,0 +1,7 @@
+<resources>
+    <color name="md_theme_dark_primary">#1E88E5</color>
+    <color name="md_theme_dark_onPrimary">#000000</color>
+    <color name="md_theme_dark_background">#121212</color>
+    <color name="md_theme_dark_onBackground">#FFFFFF</color>
+    <color name="md_theme_dark_secondary_text">#B0B0B0</color>
+</resources>

@@ -1,0 +1,7 @@
+<resources>
+    <style name="Theme.OktiMessenger" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorBackground">@color/md_theme_light_background</item>
+        <item name="colorOnBackground">@color/md_theme_light_onBackground</item>
+        <item name="colorSecondaryText">@color/md_theme_light_secondary_text</item>
+    </style>
+</resources>

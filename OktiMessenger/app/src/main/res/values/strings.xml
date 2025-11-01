@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">OktiMessenger</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="app_title" translatable="false">okti</string>
+
+    <string name="news_title" translatable="false">Новости</string>
+
+    <string name="settings_title" translatable="false">Настройки</string>
+
+    <string name="profile_title" translatable="false">Профиль</string>
+
+    <string name="profile_image">Фото профиля</string>
+
+
+
+
+</resources>
