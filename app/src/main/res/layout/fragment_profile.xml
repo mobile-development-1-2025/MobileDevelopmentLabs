@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:paddingTop="64dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/ivAvatar"
+        android:layout_width="72dp" android:layout_height="72dp"
+        android:src="@android:drawable/sym_def_app_icon"/>
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_marginTop="12dp"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="User Name" android:textSize="22sp"/>
+
+    <TextView
+        android:id="@+id/tvEmail"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="user@example.com"/>
+</LinearLayout>
