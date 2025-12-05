@@ -6,11 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.example.messenger_semester_7.databinding.FragmentSettingsBinding
 
 class SettingsFragment : Fragment() {
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: ProfileSettingsViewModel by activityViewModels()
+    private var isProgrammaticChange = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,15 +32,22 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d("SettingsFragment", "onViewCreated")
-        
-        val isDarkTheme = ThemeManager.isDarkThemeEnabled(requireContext())
-        binding.themeSwitch.isChecked = isDarkTheme
-        
+
+        viewModel.isDarkTheme.observe(viewLifecycleOwner) { isDark ->
+            val checked = isDark ?: false
+            if (binding.themeSwitch.isChecked != checked) {
+                isProgrammaticChange = true
+                binding.themeSwitch.isChecked = checked
+                isProgrammaticChange = false
+            }
+        }
+
         binding.themeSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isProgrammaticChange) {
+                return@setOnCheckedChangeListener
+            }
             Log.d("SettingsFragment", "Theme switch changed: $isChecked")
-            ThemeManager.setDarkThemeEnabled(requireContext(), isChecked)
-            ThemeManager.applyTheme(requireContext())
-            requireActivity().recreate()
+            viewModel.setTheme(isChecked)
         }
     }
 

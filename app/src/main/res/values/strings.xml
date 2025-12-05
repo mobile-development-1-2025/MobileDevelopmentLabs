@@ -8,4 +8,10 @@
     <string name="profile_email">ivan.ivanov@example.com</string>
     <string name="profile_status">В сети</string>
     <string name="dark_theme">Темная тема</string>
+    <string name="profile_name_title">Текущее имя</string>
+    <string name="profile_status_title">Текущий статус</string>
+    <string name="profile_name_hint">Введите имя</string>
+    <string name="profile_status_hint">Введите статус</string>
+    <string name="profile_save">Сохранить</string>
+    <string name="profile_edit_icon_desc">Редактировать поле</string>
 </resources>
