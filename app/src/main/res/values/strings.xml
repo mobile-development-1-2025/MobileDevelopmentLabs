@@ -22,4 +22,8 @@
     <string name="theme_system">По умолчанию</string>
     <string name="save_settings">Сохранить</string>
     <string name="reset_settings">Сбросить</string>
+    <string name="input_name">Введите имя</string>
+    <string name="input_email">Введите email</string>
+    <string name="email">Email:</string>
+    <string name="name">Имя:</string>
 </resources>

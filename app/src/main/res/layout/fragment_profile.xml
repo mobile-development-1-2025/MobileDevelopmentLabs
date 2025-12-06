@@ -34,20 +34,31 @@
                 android:id="@+id/profile_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/default_name"
+                android:text="@string/name"
                 android:textSize="20sp"
                 android:gravity="center"
                 android:layout_marginBottom="16dp" />
+
+            <EditText
+                android:id="@+id/editName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/input_name" />
 
             <TextView
                 android:id="@+id/profile_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/default_email"
-                android:textSize="16sp"
+                android:text="@string/email"
+                android:textSize="20sp"
                 android:gravity="center"
-                android:textColor="@color/gray_2"
-                android:layout_marginBottom="32dp" />
+                android:layout_marginBottom="16dp" />
+
+            <EditText
+                android:id="@+id/editEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/input_email" />
 
             <Button
                 android:id="@+id/edit_profile_button"

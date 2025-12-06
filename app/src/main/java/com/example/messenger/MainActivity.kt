@@ -8,17 +8,23 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.messenger.databinding.ActivityMainBinding
 import com.example.messenger.ui.ThemeManager
+import com.example.messenger.viewmodel.SettingsViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private lateinit var themeManager: ThemeManager
+    private lateinit var viewModel: SettingsViewModel
     private var tag: String = "Main"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         themeManager = ThemeManager(this)
+        viewModel = SettingsViewModel(this)
         binding = ActivityMainBinding.inflate(layoutInflater)
+
+        themeManager.currentTheme = viewModel.getCurrentTheme()
+        themeManager.applyTheme()
 
         setContentView(binding.root)
         setupNavigation()

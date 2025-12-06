@@ -6,21 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import android.content.Context
 import com.example.messenger.databinding.FragmentSettingsBinding
-import android.content.SharedPreferences
 import com.example.messenger.R
 import com.example.messenger.MainActivity
+import com.example.messenger.viewmodel.SettingsViewModel
+
 
 class SettingsFragment: Fragment() {
     private lateinit var binding: FragmentSettingsBinding
-    private lateinit var themeManager: ThemeManager
-    private lateinit var prefs: SharedPreferences
+    private lateinit var viewModel: SettingsViewModel
     private val tag: String = "Settings"
-
-    companion object {
-        private const val prefs_name = "app_settings"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,9 +36,7 @@ class SettingsFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Log.d(tag, "onViewCreated: View создан")
 
-        val context = requireContext()
-        prefs = context.getSharedPreferences(prefs_name, Context.MODE_PRIVATE)
-        themeManager = ThemeManager(context)
+        viewModel = SettingsViewModel(requireContext())
 
         setup()
         loadSettings()
@@ -56,7 +49,7 @@ class SettingsFragment: Fragment() {
 
     private fun setup() {
         binding.notificationsSwitch.setOnCheckedChangeListener { _, isChecked ->
-            prefs.edit().putBoolean("notifications", isChecked).apply()
+            viewModel.updateNotifications(isChecked)
         }
 
         binding.themeRadioGroup.setOnCheckedChangeListener { _, checkedId ->
@@ -67,7 +60,7 @@ class SettingsFragment: Fragment() {
                 else -> ThemeManager.THEME_SYSTEM
             }
 
-            themeManager.currentTheme = newTheme
+            viewModel.updateTheme(newTheme)
         }
 
         binding.resetSettingsButton.setOnClickListener {
@@ -75,29 +68,24 @@ class SettingsFragment: Fragment() {
         }
 
         binding.saveSettingsButton.setOnClickListener {
-            themeManager.applyTheme()
+            viewModel.applyTheme()
             (activity as? MainActivity)?.onThemeChanged()
         }
     }
 
     private fun loadSettings() {
-        binding.notificationsSwitch.isChecked = prefs.getBoolean("notifications", true)
+        viewModel.settings.observe(viewLifecycleOwner) { settings ->
+            when (settings.theme) {
+                ThemeManager.THEME_LIGHT -> binding.themeLight.isChecked = true
+                ThemeManager.THEME_DARK -> binding.themeDark.isChecked = true
+                else -> binding.themeSystem.isChecked = true
+            }
 
-        when (themeManager.currentTheme) {
-            "light" -> binding.themeLight.isChecked = true
-            "dark" -> binding.themeDark.isChecked = true
-            else -> binding.themeSystem.isChecked = true
+            binding.notificationsSwitch.isChecked = settings.notificationsEnabled
         }
-
     }
 
     private fun resetSettings() {
-        with(prefs.edit()) {
-            putBoolean("notifications", true)
-            apply()
-        }
-        themeManager.currentTheme = ThemeManager.THEME_SYSTEM
-        themeManager.applyTheme()
-        loadSettings()
+        viewModel.resetSettings()
     }
 }
