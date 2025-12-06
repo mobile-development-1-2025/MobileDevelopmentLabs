@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Messenger</string>
+
+    <string name="title_news_feed">Лента новостей</string>
+    <string name="placeholder_empty">Здесь пока пусто</string>
+
+    <string name="title_profile">Профиль</string>
+    <string name="action_edit">Редактировать</string>
+
+    <string name="profile_name">Laura Palmer</string>
+    <string name="profile_username">"@meanwhile"</string>
+    <string name="profile_username_clean">meanwhile</string>
+    <string name="profile_phone">+0 (000) 000-00-00</string>
+
+    <string name="title_edit_profile">Редактирование</string>
+    <string name="action_save_changes">Сохранить изменения</string>
+    <string name="action_back">Назад</string>
+
+    <string name="label_name">Имя пользователя</string>
+    <string name="label_username">Юзернейм</string>
+    <string name="label_phone">Телефон</string>
+
+    <string name="title_settings">Настройки</string>
+    <string name="setting_theme_label">Тема</string>
+</resources>
+
