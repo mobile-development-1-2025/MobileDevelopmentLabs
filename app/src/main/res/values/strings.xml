@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Messenger</string>
+    <string name="nav_news">Новости</string>
+    <string name="nav_profile">Профиль</string>
+    <string name="nav_settings">Настройки</string>
+
+    <string name="news_title">Тут должны быть новости)</string>
+
+    <string name="profile_title">Профиль</string>
+    <string name="profile_image_desc">Аватар профиля</string>
+    <string name="default_name">Иван Иваныч</string>
+    <string name="default_email">ii@example.com</string>
+    <string name="edit_profile">Редактировать данные</string>
+    <string name="logout">Выйти</string>
+
+    <string name="settings_title">Настройки</string>
+    <string name="notifications_settings">Уведомления</string>
+    <string name="enable_notifications">Включить</string>
+    <string name="theme_settings">Тема</string>
+    <string name="theme_light">Светлая</string>
+    <string name="theme_dark">Ночная</string>
+    <string name="theme_system">По умолчанию</string>
+    <string name="save_settings">Сохранить</string>
+    <string name="reset_settings">Сбросить</string>
+    <string name="input_name">Введите имя</string>
+    <string name="input_email">Введите email</string>
+    <string name="email">Email:</string>
+    <string name="name">Имя:</string>
+</resources>
