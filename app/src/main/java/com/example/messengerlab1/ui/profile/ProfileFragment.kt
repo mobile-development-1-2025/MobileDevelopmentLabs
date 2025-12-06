@@ -5,13 +5,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.messengerlab1.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
+
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
-
+    private val viewModel: ProfileScreenViewModel by viewModels()
     private val tagLog = "ProfileFragment"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +23,8 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
@@ -29,11 +33,30 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         Log.d(tagLog, "onViewCreated")
 
-        binding.tvName.text = "Daria Edigareva"
-        binding.tvEmail.text = "dariaedigareva@gmail.com"
-        binding.tvAbout.text = "Учусь писать на Kotlin 🐱"
+        binding.tvEmail.text = "dasha@example.com"
+
+        viewModel.nickname.observe(viewLifecycleOwner) { nick ->
+            if (binding.inputNickname.text.toString() != nick) {
+                binding.inputNickname.setText(nick)
+            }
+        }
+
+        viewModel.mood.observe(viewLifecycleOwner) { text ->
+            if (binding.inputMood.text.toString() != text) {
+                binding.inputMood.setText(text)
+            }
+        }
+
+        binding.inputNickname.addTextChangedListener { editable ->
+            viewModel.onNicknameChanged(editable?.toString().orEmpty())
+        }
+
+        binding.inputMood.addTextChangedListener { editable ->
+            viewModel.onMoodChanged(editable?.toString().orEmpty())
+        }
     }
 
     override fun onStart()  { super.onStart();  Log.d(tagLog, "onStart") }

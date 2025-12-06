@@ -7,13 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.messengerlab1.databinding.FragmentSettingsBinding
 
 class SettingsFragment : Fragment() {
+
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
-
-    private val tagLog = "SettingsFragment"
+    private val viewModel: SettingsScreenViewModel by viewModels()
+    private val tagLog = "SettingsFragmentV2"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +23,8 @@ class SettingsFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
@@ -30,14 +33,25 @@ class SettingsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         Log.d(tagLog, "onViewCreated")
 
-        binding.switchTheme.setOnCheckedChangeListener { _, isChecked ->
+        viewModel.isNightMode.observe(viewLifecycleOwner) { enabled ->
+            Log.d(tagLog, "observe isNightMode = $enabled")
+
+            if (binding.switchTheme.isChecked != enabled) {
+                binding.switchTheme.isChecked = enabled
+            }
+
             AppCompatDelegate.setDefaultNightMode(
-                if (isChecked) AppCompatDelegate.MODE_NIGHT_YES
+                if (enabled) AppCompatDelegate.MODE_NIGHT_YES
                 else AppCompatDelegate.MODE_NIGHT_NO
             )
-            Log.d(tagLog, "Theme switched: $isChecked")
+        }
+
+        binding.switchTheme.setOnCheckedChangeListener { _, isChecked ->
+            Log.d(tagLog, "switchTheme changed: $isChecked")
+            viewModel.setNightMode(isChecked)
         }
     }
 
