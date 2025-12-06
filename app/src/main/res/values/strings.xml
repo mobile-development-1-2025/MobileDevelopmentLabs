@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">lab1</string>
+    <string name="first_name">Имя:</string>
+    <string name="last_name">Фамилия:</string>
+    <string name="email">Email:</string>
+    <string name="age">Возраст:</string>
+    <string name="city">Город:</string>
+    <string name="news">Новости</string>
+    <string name="dark_theme">Тёмная тема</string>
+    <string name="profile">Профиль</string>
+    <string name="settings">Настройки</string>
+    <string name="news_plug">Заглушка новостной ленты</string>
+</resources>
