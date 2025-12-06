@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.example.messenger.R
 import com.example.messenger.databinding.FragmentSettingsBinding
 
@@ -16,11 +18,15 @@ class SettingsFragment : Fragment() {
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
     
+    private val viewModel: SettingsViewModel by viewModels()
+    
     companion object {
         private const val TAG = "SettingsFragment"
         private const val PREFS_NAME = "messenger_prefs"
         private const val KEY_THEME = "theme_mode"
     }
+    
+    private var isUpdatingFromViewModel = false
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,27 +49,44 @@ class SettingsFragment : Fragment() {
         
         binding.textSettingsContent.text = getString(R.string.settings_content)
         
+        loadSavedTheme()
+        setupObservers()
         setupThemeSwitch()
         setupNotificationsSwitch()
     }
     
-    private fun setupThemeSwitch() {
+    private fun loadSavedTheme() {
         val prefs = requireContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        val currentTheme = prefs.getInt(KEY_THEME, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-        
-        binding.switchTheme.isChecked = currentTheme == AppCompatDelegate.MODE_NIGHT_YES
-        
-        binding.switchTheme.setOnCheckedChangeListener { _, isChecked ->
-            val newTheme = if (isChecked) {
-                AppCompatDelegate.MODE_NIGHT_YES
-            } else {
-                AppCompatDelegate.MODE_NIGHT_NO
+        val savedTheme = prefs.getInt(KEY_THEME, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+        viewModel.initTheme(savedTheme)
+    }
+    
+    private fun setupObservers() {
+        viewModel.isDarkTheme.observe(viewLifecycleOwner, Observer { isDark ->
+            if (!isUpdatingFromViewModel) {
+                isUpdatingFromViewModel = true
+                binding.switchTheme.isChecked = isDark
+                isUpdatingFromViewModel = false
             }
-            
-            AppCompatDelegate.setDefaultNightMode(newTheme)
-            prefs.edit().putInt(KEY_THEME, newTheme).apply()
-            
-            Log.d(TAG, "Theme changed to: ${if (isChecked) "Dark" else "Light"}")
+            Log.d(TAG, "isDarkTheme changed: $isDark")
+        })
+    }
+    
+    private fun setupThemeSwitch() {
+        binding.switchTheme.setOnCheckedChangeListener { _, isChecked ->
+            if (!isUpdatingFromViewModel) {
+                viewModel.setDarkTheme(isChecked)
+                
+                val prefs = requireContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+                val themeMode = if (isChecked) {
+                    AppCompatDelegate.MODE_NIGHT_YES
+                } else {
+                    AppCompatDelegate.MODE_NIGHT_NO
+                }
+                prefs.edit().putInt(KEY_THEME, themeMode).apply()
+                
+                Log.d(TAG, "Theme changed to: ${if (isChecked) "Dark" else "Light"}")
+            }
         }
     }
     

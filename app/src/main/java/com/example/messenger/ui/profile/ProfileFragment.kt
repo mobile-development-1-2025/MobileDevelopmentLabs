@@ -1,12 +1,15 @@
 package com.example.messenger.ui.profile
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.messenger.R
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.example.messenger.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
@@ -14,9 +17,13 @@ class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
     
+    private val viewModel: ProfileViewModel by viewModels()
+    
     companion object {
         private const val TAG = "ProfileFragment"
     }
+    
+    private var isUpdatingFromViewModel = false
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +44,54 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "onViewCreated")
         
-        binding.textProfileContent.text = getString(R.string.profile_content)
+        setupObservers()
+        setupEditTexts()
+    }
+    
+    private fun setupObservers() {
+        viewModel.userName.observe(viewLifecycleOwner, Observer { name ->
+            if (!isUpdatingFromViewModel) {
+                isUpdatingFromViewModel = true
+                binding.editTextUserName.setText(name)
+                isUpdatingFromViewModel = false
+            }
+            Log.d(TAG, "userName changed: $name")
+        })
+        
+        viewModel.userStatus.observe(viewLifecycleOwner, Observer { status ->
+            if (!isUpdatingFromViewModel) {
+                isUpdatingFromViewModel = true
+                binding.editTextUserStatus.setText(status)
+                isUpdatingFromViewModel = false
+            }
+            Log.d(TAG, "userStatus changed: $status")
+        })
+    }
+    
+    private fun setupEditTexts() {
+        binding.editTextUserName.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            
+            override fun afterTextChanged(s: Editable?) {
+                if (!isUpdatingFromViewModel && s != null) {
+                    viewModel.updateUserName(s.toString())
+                }
+            }
+        })
+        
+        binding.editTextUserStatus.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            
+            override fun afterTextChanged(s: Editable?) {
+                if (!isUpdatingFromViewModel && s != null) {
+                    viewModel.updateUserStatus(s.toString())
+                }
+            }
+        })
     }
     
     override fun onStart() {
