@@ -10,4 +10,6 @@
     <string name="profile">Профиль</string>
     <string name="settings">Настройки</string>
     <string name="news_plug">Заглушка новостной ленты</string>
+    <string name="enter_name">Введите имя</string>
+    <string name="enter_status">Введите статус</string>
 </resources>
