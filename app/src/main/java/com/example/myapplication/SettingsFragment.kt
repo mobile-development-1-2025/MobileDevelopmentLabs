@@ -1,6 +1,5 @@
 package com.example.myapplication
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,54 +7,43 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.switchmaterial.SwitchMaterial
-import androidx.core.content.edit
+import com.example.myapplication.viewmodel.SettingsViewModel
 
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        Log.i("Lifecycle", "SettingsFragment onViewCreated")
-    }
+    private lateinit var viewModel: SettingsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
 
-        val switchTheme = view.findViewById<SwitchMaterial>(R.id.themeSwitch)
+        viewModel = ViewModelProvider(requireActivity())[SettingsViewModel::class.java]
 
-        val prefs = requireActivity().getSharedPreferences("settings", Context.MODE_PRIVATE)
-        val isDarkMode = prefs.getBoolean("dark_mode", false)
+        val themeSwitch = view.findViewById<SwitchMaterial>(R.id.themeSwitch)
 
-        switchTheme.isChecked = isDarkMode
-
-        if (isDarkMode) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        viewModel.darkMode.observe(viewLifecycleOwner) { isDark ->
+            if (themeSwitch.isChecked != isDark) {
+                themeSwitch.isChecked = isDark
+            }
+            AppCompatDelegate.setDefaultNightMode(
+                if (isDark) AppCompatDelegate.MODE_NIGHT_YES
+                else AppCompatDelegate.MODE_NIGHT_NO
+            )
+        }
+        themeSwitch.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.setDarkMode(isChecked)
         }
 
-
-        switchTheme.setOnCheckedChangeListener { value, isChecked ->
-            prefs.edit {
-                putBoolean("dark_mode", isChecked)
-            }
-            if (isChecked) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
-            requireActivity().recreate()
-
-        }
-
+        Log.i("Lifecycle", "SettingsFragment onViewCreated")
         return view
     }
 
-
     override fun onDestroyView() {
-        super.onDestroyView(); Log.i("Lifecycle", "SettingsFragment onDestroyView")
+        super.onDestroyView()
+        Log.i("Lifecycle", "SettingsFragment onDestroyView")
     }
 }
