@@ -68,12 +68,12 @@
                     android:textStyle="bold"
                     android:textColor="@android:color/black" />
 
-                <TextView
+                <EditText
                     android:id="@+id/lblNameValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Присутствует"
+                    android:hint="Введите имя"
                     android:textSize="16sp"
                     android:textColor="@android:color/black"
                     android:gravity="end" />
@@ -97,12 +97,13 @@
                     android:textStyle="bold"
                     android:textColor="@android:color/black" />
 
-                <TextView
+                <EditText
                     android:id="@+id/lblAgeValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Тоже есть"
+                    android:inputType="number"
+                    android:hint="Введите возраст"
                     android:textSize="16sp"
                     android:textColor="@android:color/black"
                     android:gravity="end" />
