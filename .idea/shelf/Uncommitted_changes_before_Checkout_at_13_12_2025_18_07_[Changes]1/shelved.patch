@@ -1,0 +1,198 @@
+Index: VsemK/app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.VsemK\"\r\n        tools:targetApi=\"31\">\r\n\r\n        <activity\r\n            android:name=\".MainActivity\"\r\n            android:exported=\"true\"\r\n            android:theme=\"@style/Theme.VsemK\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/VsemK/app/src/main/AndroidManifest.xml b/VsemK/app/src/main/AndroidManifest.xml
+--- a/VsemK/app/src/main/AndroidManifest.xml	(revision 5f1b73c14ad615c18456ae7bad4320d4d1af6373)
++++ b/VsemK/app/src/main/AndroidManifest.xml	(date 1765631879456)
+@@ -2,6 +2,9 @@
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:tools="http://schemas.android.com/tools">
+ 
++    <uses-permission android:name="android.permission.INTERNET" />
++    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
++
+     <application
+         android:allowBackup="true"
+         android:dataExtractionRules="@xml/data_extraction_rules"
+Index: VsemK/app/src/main/java/com/example/vsemk/ui/feed/FeedFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.vsemk.ui.feed\r\n\r\nimport android.os.Bundle\r\nimport android.util.Log\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport android.widget.TextView\r\nimport androidx.fragment.app.Fragment\r\n\r\nclass FeedFragment : Fragment() {\r\n\r\n    override fun onCreateView(\r\n        inflater: LayoutInflater,\r\n        container: ViewGroup?,\r\n        savedInstanceState: Bundle?\r\n    ): View? {\r\n        Log.d(\"FeedFragment\", \"onCreateView\")\r\n        return TextView(requireContext()).apply {\r\n            text = \"Это новостная лента (заглушка)\"\r\n            setPadding(32, 32, 32, 32)\r\n        }\r\n    }\r\n\r\n    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {\r\n        super.onViewCreated(view, savedInstanceState)\r\n        Log.d(\"FeedFragment\", \"onViewCreated\")\r\n    }\r\n\r\n    override fun onStart() {\r\n        super.onStart()\r\n        Log.d(\"FeedFragment\", \"onStart\")\r\n    }\r\n\r\n    override fun onResume() {\r\n        super.onResume()\r\n        Log.d(\"FeedFragment\", \"onResume\")\r\n    }\r\n\r\n    override fun onPause() {\r\n        super.onPause()\r\n        Log.d(\"FeedFragment\", \"onPause\")\r\n    }\r\n\r\n    override fun onStop() {\r\n        super.onStop()\r\n        Log.d(\"FeedFragment\", \"onStop\")\r\n    }\r\n\r\n    override fun onDestroyView() {\r\n        super.onDestroyView()\r\n        Log.d(\"FeedFragment\", \"onDestroyView\")\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/VsemK/app/src/main/java/com/example/vsemk/ui/feed/FeedFragment.kt b/VsemK/app/src/main/java/com/example/vsemk/ui/feed/FeedFragment.kt
+--- a/VsemK/app/src/main/java/com/example/vsemk/ui/feed/FeedFragment.kt	(revision 5f1b73c14ad615c18456ae7bad4320d4d1af6373)
++++ b/VsemK/app/src/main/java/com/example/vsemk/ui/feed/FeedFragment.kt	(date 1765631879472)
+@@ -5,50 +5,111 @@
+ import android.view.LayoutInflater
+ import android.view.View
+ import android.view.ViewGroup
+-import android.widget.TextView
+ import androidx.fragment.app.Fragment
++import androidx.fragment.app.viewModels
++import androidx.lifecycle.Observer
++import androidx.recyclerview.widget.LinearLayoutManager
++import com.example.vsemk.R
++import com.google.android.material.button.MaterialButton
++import com.google.android.material.snackbar.Snackbar
+ 
+ class FeedFragment : Fragment() {
+ 
++    companion object {
++        private const val TAG = "FeedFragment"
++    }
++
++    private val viewModel: FeedViewModel by viewModels()
++    private lateinit var adapter: MessageAdapter
++    private lateinit var recyclerView: androidx.recyclerview.widget.RecyclerView
++    private lateinit var refreshButton: MaterialButton
++    private lateinit var progressBar: View
++    private lateinit var errorTextView: android.widget.TextView
++
+     override fun onCreateView(
+         inflater: LayoutInflater,
+         container: ViewGroup?,
+         savedInstanceState: Bundle?
+     ): View? {
+-        Log.d("FeedFragment", "onCreateView")
+-        return TextView(requireContext()).apply {
+-            text = "Это новостная лента (заглушка)"
+-            setPadding(32, 32, 32, 32)
+-        }
++        Log.d(TAG, "onCreateView")
++        return inflater.inflate(R.layout.fragment_feed, container, false)
+     }
+ 
+     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+         super.onViewCreated(view, savedInstanceState)
+-        Log.d("FeedFragment", "onViewCreated")
++        Log.d(TAG, "onViewCreated")
++
++        setupViews(view)
++        setupRecyclerView()
++        setupObservers()
++        setupClickListeners()
++    }
++
++    private fun setupViews(view: View) {
++        recyclerView = view.findViewById(R.id.recycler_view)
++        refreshButton = view.findViewById(R.id.btn_refresh)
++        progressBar = view.findViewById(R.id.progress_bar)
++        errorTextView = view.findViewById(R.id.tv_error)
++    }
++
++    private fun setupRecyclerView() {
++        adapter = MessageAdapter()
++        recyclerView.layoutManager = LinearLayoutManager(requireContext())
++        recyclerView.adapter = adapter
++    }
++
++    private fun setupObservers() {
++        viewModel.messages.observe(viewLifecycleOwner, Observer { messages ->
++            adapter.submitList(messages)
++            Log.d(TAG, "Сообщения обновлены в UI: ${messages.size}")
++        })
++
++        viewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
++            progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
++            refreshButton.isEnabled = !isLoading
++        })
++
++        viewModel.error.observe(viewLifecycleOwner, Observer { error ->
++            if (error != null) {
++                errorTextView.text = error
++                errorTextView.visibility = View.VISIBLE
++                Snackbar.make(requireView(), error, Snackbar.LENGTH_LONG).show()
++                Log.e(TAG, "Ошибка: $error")
++            } else {
++                errorTextView.visibility = View.GONE
++            }
++        })
++    }
++
++    private fun setupClickListeners() {
++        refreshButton.setOnClickListener {
++            viewModel.refreshMessages()
++            Log.d(TAG, "Нажата кнопка обновления")
++        }
+     }
+ 
+     override fun onStart() {
+         super.onStart()
+-        Log.d("FeedFragment", "onStart")
++        Log.d(TAG, "onStart")
+     }
+ 
+     override fun onResume() {
+         super.onResume()
+-        Log.d("FeedFragment", "onResume")
++        Log.d(TAG, "onResume")
+     }
+ 
+     override fun onPause() {
+         super.onPause()
+-        Log.d("FeedFragment", "onPause")
++        Log.d(TAG, "onPause")
+     }
+ 
+     override fun onStop() {
+         super.onStop()
+-        Log.d("FeedFragment", "onStop")
++        Log.d(TAG, "onStop")
+     }
+ 
+     override fun onDestroyView() {
+         super.onDestroyView()
+-        Log.d("FeedFragment", "onDestroyView")
++        Log.d(TAG, "onDestroyView")
+     }
+-}
+\ No newline at end of file
++}
+Index: VsemK/app/build.gradle.kts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    alias(libs.plugins.android.application)\r\n    alias(libs.plugins.kotlin.android)\r\n}\r\n\r\nandroid {\r\n    namespace = \"com.example.vsemk\"\r\n    compileSdk = 36\r\n\r\n    defaultConfig {\r\n        applicationId = \"com.example.vsemk\"\r\n        minSdk = 24\r\n        targetSdk = 36\r\n        versionCode = 1\r\n        versionName = \"1.0\"\r\n\r\n        testInstrumentationRunner = \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            isMinifyEnabled = false\r\n            proguardFiles(\r\n                getDefaultProguardFile(\"proguard-android-optimize.txt\"),\r\n                \"proguard-rules.pro\"\r\n            )\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility = JavaVersion.VERSION_11\r\n        targetCompatibility = JavaVersion.VERSION_11\r\n    }\r\n    kotlinOptions {\r\n        jvmTarget = \"11\"\r\n    }\r\n}\r\n\r\ndependencies {\r\n    implementation(libs.androidx.core.ktx)\r\n    implementation(libs.androidx.appcompat)\r\n    implementation(libs.material)\r\n\r\n\r\n    implementation(\"androidx.navigation:navigation-fragment-ktx:2.8.3\")\r\n    implementation(\"androidx.navigation:navigation-ui-ktx:2.8.3\")\r\n    \r\n    // ViewModel and LiveData\r\n    implementation(\"androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0\")\r\n    implementation(\"androidx.lifecycle:lifecycle-livedata-ktx:2.7.0\")\r\n    implementation(\"androidx.lifecycle:lifecycle-runtime-ktx:2.7.0\")\r\n    implementation(\"androidx.fragment:fragment-ktx:1.6.2\")\r\n\r\n    testImplementation(libs.junit)\r\n    androidTestImplementation(libs.androidx.junit)\r\n    androidTestImplementation(libs.androidx.espresso.core)\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/VsemK/app/build.gradle.kts b/VsemK/app/build.gradle.kts
+--- a/VsemK/app/build.gradle.kts	(revision 5f1b73c14ad615c18456ae7bad4320d4d1af6373)
++++ b/VsemK/app/build.gradle.kts	(date 1765631879456)
+@@ -1,6 +1,7 @@
+ plugins {
+     alias(libs.plugins.android.application)
+     alias(libs.plugins.kotlin.android)
++    id("kotlin-kapt")
+ }
+ 
+ android {
+@@ -50,6 +51,23 @@
+     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+     implementation("androidx.fragment:fragment-ktx:1.6.2")
+ 
++    // RecyclerView
++    implementation("androidx.recyclerview:recyclerview:1.3.2")
++
++    // Room
++    val roomVersion = "2.6.1"
++    implementation("androidx.room:room-runtime:$roomVersion")
++    implementation("androidx.room:room-ktx:$roomVersion")
++    kapt("androidx.room:room-compiler:$roomVersion")
++
++    // Retrofit
++    implementation("com.squareup.retrofit2:retrofit:2.9.0")
++    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
++    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
++
++    // Coroutines
++    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
++
+     testImplementation(libs.junit)
+     androidTestImplementation(libs.androidx.junit)
+     androidTestImplementation(libs.androidx.espresso.core)
