@@ -1,0 +1,11 @@
+# Игнорировать build, локальные файлы
+*.iml
+.gradle
+/local.properties
+/.idea
+.DS_Store
+/build
+/captures
+.cxx
+local.properties
+# Не добавляй .env, если он есть (но в этой задаче его нет)
