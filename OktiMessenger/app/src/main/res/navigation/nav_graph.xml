@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/newsFragment">
+
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="com.example.oktimessenger.NewsFragment"
+        android:label="Новости"
+        tools:layout="@layout/fragment_news" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.oktimessenger.ProfileFragment"
+        android:label="Профиль"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.oktimessenger.SettingsFragment"
+        android:label="Настройки"
+        tools:layout="@layout/fragment_settings" />
+</navigation>
