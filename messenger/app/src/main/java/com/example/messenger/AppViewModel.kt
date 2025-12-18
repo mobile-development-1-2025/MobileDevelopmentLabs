@@ -6,10 +6,13 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 
 class AppViewModel(application: Application) : AndroidViewModel(application) {
 
     private val TAG = "LifeCycleLog"
+
     private val PREFS_NAME = "profile_prefs"
     private val prefs = application.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
@@ -18,22 +21,28 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     private val KEY_PHONE = "phoneNumber"
     private val KEY_DARK_MODE = "isDarkMode"
 
+    // ---------- Профиль ----------
     private val _userProfile = MutableLiveData(loadProfile())
     val userProfile: LiveData<UserProfile> = _userProfile
 
     private val _isDarkMode = MutableLiveData(loadDarkMode())
     val isDarkMode: LiveData<Boolean> = _isDarkMode
 
+    // ---------- Сообщения (лента) ----------
+    private val messageRepository = MessageRepository(application)
+    val messages: LiveData<List<Message>> = messageRepository.getMessages()
+
     init {
         Log.d(TAG, "AppViewModel: init - Создан")
     }
 
-
+    // Загрузка профиля из SharedPreferences
     private fun loadProfile(): UserProfile {
         return UserProfile(
             name = prefs.getString(KEY_NAME, "Laura Palmer") ?: "Laura Palmer",
             username = prefs.getString(KEY_USERNAME, "meanwhile") ?: "meanwhile",
-            phoneNumber = prefs.getString(KEY_PHONE, "+0 (000) 000-00-00") ?: "+0 (000) 000-00-00"
+            phoneNumber = prefs.getString(KEY_PHONE, "+0 (000) 000-00-00")
+                ?: "+0 (000) 000-00-00"
         )
     }
 
@@ -47,7 +56,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-
+    // Загрузка тёмной темы
     private fun loadDarkMode(): Boolean {
         return prefs.getBoolean(KEY_DARK_MODE, false)
     }
@@ -56,6 +65,13 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         if (_isDarkMode.value != enabled) {
             _isDarkMode.value = enabled
             prefs.edit().putBoolean(KEY_DARK_MODE, enabled).apply()
+        }
+    }
+
+    // Обновление сообщений вручную
+    fun refreshMessages() {
+        viewModelScope.launch {
+            messageRepository.refreshMessages()
         }
     }
 
