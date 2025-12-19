@@ -1,0 +1,11 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <attr name="colorBackgroundReverse" format="color" />
+    <style name="Theme.Messenger" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <item name="android:colorBackground">@color/light_grey</item>
+
+        <item name="colorOnBackground">@color/greyish_black</item>
+
+        <item name="colorBackgroundReverse">@color/greyish_black</item>
+    </style>
+</resources>
