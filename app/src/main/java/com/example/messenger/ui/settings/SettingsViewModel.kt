@@ -45,4 +45,3 @@ class SettingsViewModel : ViewModel() {
         Log.d(TAG, "init - ViewModel created")
     }
 }
-

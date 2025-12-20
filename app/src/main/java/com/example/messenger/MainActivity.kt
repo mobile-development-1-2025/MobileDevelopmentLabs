@@ -1,10 +1,8 @@
 package com.example.messenger
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.messenger.databinding.ActivityMainBinding
@@ -15,27 +13,16 @@ class MainActivity : AppCompatActivity() {
     
     companion object {
         private const val TAG = "MainActivity"
-        private const val PREFS_NAME = "messenger_prefs"
-        private const val KEY_THEME = "theme_mode"
     }
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "onCreate")
         
-        applySavedTheme()
-        
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         
         setupNavigation()
-    }
-    
-    private fun applySavedTheme() {
-        val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        val savedTheme = prefs.getInt(KEY_THEME, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-        AppCompatDelegate.setDefaultNightMode(savedTheme)
-        Log.d(TAG, "Applied saved theme: $savedTheme")
     }
     
     private fun setupNavigation() {

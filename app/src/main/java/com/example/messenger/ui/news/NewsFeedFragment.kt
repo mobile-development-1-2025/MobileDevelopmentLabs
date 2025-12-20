@@ -6,8 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.messenger.R
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.messenger.databinding.FragmentNewsFeedBinding
+import com.example.messenger.data.MessageRepository
+import com.example.messenger.data.local.AppDatabase
 
 class NewsFeedFragment : Fragment() {
     
@@ -18,9 +21,10 @@ class NewsFeedFragment : Fragment() {
         private const val TAG = "NewsFeedFragment"
     }
     
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Log.d(TAG, "onCreate")
+    private val viewModel: NewsFeedViewModel by viewModels {
+        val db = AppDatabase.getInstance(requireContext())
+        val repo = MessageRepository(db)
+        NewsFeedViewModel.Factory(repo)
     }
     
     override fun onCreateView(
@@ -28,16 +32,27 @@ class NewsFeedFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        Log.d(TAG, "onCreateView")
         _binding = FragmentNewsFeedBinding.inflate(inflater, container, false)
         return binding.root
     }
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d(TAG, "onViewCreated")
+        val adapter = MessageAdapter()
+        binding.recyclerMessages.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerMessages.adapter = adapter
+
+        binding.buttonRefresh.setOnClickListener {
+            viewModel.refresh()
+        }
+
+        viewModel.messages.observe(viewLifecycleOwner) { list ->
+            adapter.submitList(list)
+        }
         
-        binding.textNewsContent.text = getString(R.string.news_content)
+        if (savedInstanceState == null) {
+            viewModel.refresh()
+        }
     }
     
     override fun onStart() {
@@ -62,13 +77,7 @@ class NewsFeedFragment : Fragment() {
     
     override fun onDestroyView() {
         super.onDestroyView()
-        Log.d(TAG, "onDestroyView")
         _binding = null
-    }
-    
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d(TAG, "onDestroy")
     }
 }
 
