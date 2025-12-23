@@ -12,4 +12,5 @@
     <string name="news_plug">Заглушка новостной ленты</string>
     <string name="enter_name">Введите имя</string>
     <string name="enter_status">Введите статус</string>
+    <string name="refresh">Обновить</string>
 </resources>
