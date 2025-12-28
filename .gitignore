@@ -1,0 +1,83 @@
+# === Android / Gradle ===
+.gradle/
+build/
+captures/
+*.apk
+*.aab
+*.ap_
+*.dex
+*.class
+*.iml
+*.hprof
+
+# === IntelliJ / Android Studio ===
+.idea/
+*.iws
+*.ipr
+.idea/caches/
+.idea/libraries/
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+.idea/shelf/
+.idea/deploymentTargetDropDown.xml
+.idea/deploymentTargets.xml
+.idea/misc.xml
+
+# === Jetpack Compose preview cache ===
+.idea/compose-preview-cache/
+
+# === Local configuration files ===
+local.properties
+*.keystore
+*.jks
+key.properties
+
+# === Gradle wrapper logs ===
+gradle-app.setting
+gradlew.bat
+gradlew
+gradle/
+!gradle/wrapper/gradle-wrapper.jar
+
+# === Log files ===
+*.log
+
+# === Android Studio native build ===
+.cxx/
+
+# === Generated files ===
+app/build/
+*/build/
+out/
+
+# === OS specific ===
+.DS_Store
+Thumbs.db
+
+# === Kotlin ===
+*.kotlin_module
+*.kotlin_metadata
+
+# === Unit test reports ===
+test-results/
+reports/
+
+# === Temporary files ===
+*.tmp
+*.temp
+*.swp
+
+# === Misc ===
+.idea/.name
+*.bak
+*.orig
+*.rej
+
+# === Local environment settings ===
+.env
+.env.local
+
+# === JetBrains Fleet ===
+.fleet/
