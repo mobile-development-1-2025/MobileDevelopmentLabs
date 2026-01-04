@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.messengerlab1.data.db.MessageEntity
 import com.example.messengerlab1.data.repo.MessageRepository
 import kotlinx.coroutines.launch
+import androidx.lifecycle.MutableLiveData
 
 class FeedViewModel(
     private val repository: MessageRepository
@@ -19,13 +20,17 @@ class FeedViewModel(
     init {
         Log.d(tag, "init: created")
     }
+    private val _syncSuccess = MutableLiveData<Unit>()
+    val syncSuccess: LiveData<Unit> = _syncSuccess
 
     fun refresh() {
         Log.d(tag, "refresh: clicked")
         viewModelScope.launch {
             try {
                 repository.refresh()
+                _syncSuccess.postValue(Unit)
                 Log.d(tag, "refresh: success")
+
             } catch (e: Exception) {
                 Log.d(tag, "refresh: failed -> ${e.message}")
             }

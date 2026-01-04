@@ -10,7 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.messengerlab1.App
 import com.example.messengerlab1.databinding.FragmentFeedBinding
-
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 class FeedFragment : Fragment() {
 
     private var _binding: FragmentFeedBinding? = null
@@ -53,11 +55,25 @@ class FeedFragment : Fragment() {
             adapter.submitList(items)
         }
 
-        binding.btnRefresh.setOnClickListener {
-            viewModel.refresh()
+        val online = isOnline(requireContext())
+        binding.tvOffline.visibility = if (online) View.GONE else View.VISIBLE
+        binding.fabRefresh.isEnabled = online
+
+        binding.fabRefresh.setOnClickListener {
+            val onlineNow = isOnline(requireContext())
+            binding.tvOffline.visibility = if (onlineNow) View.GONE else View.VISIBLE
+            binding.fabRefresh.isEnabled = onlineNow
+
+            if (onlineNow) viewModel.refresh()
         }
 
-        // Опционально: при первом заходе можно авто-обновить, чтобы лента не была пустой.
+        viewModel.syncSuccess.observe(viewLifecycleOwner) {
+            com.example.messengerlab1.work.notify.SyncNotifier.show(
+                requireContext(),
+                "Новые данные получены"
+            )
+        }
+
         viewModel.refresh()
     }
 
@@ -75,5 +91,12 @@ class FeedFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         Log.d(tagLog, "onDestroy")
+    }
+
+    private fun isOnline(context: Context): Boolean {
+        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val network = cm.activeNetwork ?: return false
+        val caps = cm.getNetworkCapabilities(network) ?: return false
+        return caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
 }
