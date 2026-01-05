@@ -1,0 +1,33 @@
+package com.example.messenger.db
+
+import android.content.Context
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import com.example.messenger.data.dao.NewsDao
+import com.example.messenger.data.entities.NewsEntity
+
+@Database(entities = [NewsEntity::class], version = 2)
+abstract class MessengerDatabase: RoomDatabase() {
+    abstract fun NewsDao(): NewsDao
+
+    companion object {
+        private var INSTANCE: MessengerDatabase? = null
+
+        fun getInstance(context: Context): MessengerDatabase {
+            synchronized(this) {
+                var instance = INSTANCE
+                if (instance == null) {
+                    instance = Room.databaseBuilder(
+                        context.applicationContext,
+                        MessengerDatabase::class.java,
+                        "news_db"
+
+                    ).fallbackToDestructiveMigration().build()
+                    INSTANCE = instance
+                }
+                return instance
+            }
+        }
+    }
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bottom_nav_background">#FFFFFFFF</color>
+    <color name="bottom_nav_item_selected">#FF6200EE</color>
+    <color name="bottom_nav_item_unselected">#FF757575</color>
+
+    <style name="MenuTextAppearance">
+        <item name="android:background">@color/bottom_nav_background</item>
+        <item name="itemTextAppearanceActive">@style/MenuTextAppearance.Active</item>
+        <item name="itemTextAppearanceInactive">@style/MenuTextAppearance.Inactive</item>
+        <item name="labelVisibilityMode">labeled</item>
+    </style>
+
+    <style name="MenuTextAppearance.Active">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/bottom_nav_item_selected</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="MenuTextAppearance.Inactive">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/bottom_nav_item_unselected</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+</resources>
