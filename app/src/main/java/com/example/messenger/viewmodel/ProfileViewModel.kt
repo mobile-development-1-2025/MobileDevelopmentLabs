@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
-import com.example.messenger.data.UserData
+import com.example.messenger.data.dto.UserData
 
 class ProfileViewModel(context: Context): ViewModel() {
     companion object {

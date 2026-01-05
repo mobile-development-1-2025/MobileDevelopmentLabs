@@ -1,6 +1,5 @@
 package com.example.messenger.ui
 
-import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import android.os.Bundle
@@ -10,7 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.messenger.databinding.FragmentProfileBinding
 import com.example.messenger.viewmodel.ProfileViewModel
-import com.example.messenger.data.UserData
+import com.example.messenger.data.dto.UserData
 
 class ProfileFragment: Fragment() {
     private val tag: String = "Profile"

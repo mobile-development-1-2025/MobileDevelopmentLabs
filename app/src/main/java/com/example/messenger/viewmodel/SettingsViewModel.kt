@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
-import com.example.messenger.data.SettingsData
+import com.example.messenger.data.dto.SettingsData
 import com.example.messenger.ui.ThemeManager
 
 
