@@ -16,4 +16,12 @@ interface MessageDao {
 
     @Query("DELETE FROM messages")
     suspend fun clear()
+
+    @Query("UPDATE messages SET liked = :liked WHERE id = :id")
+    suspend fun setLiked(id: Int, liked: Boolean)
+
+    @Query("SELECT id, liked FROM messages")
+    suspend fun getLikedMap(): List<LikedRow>
+
+    data class LikedRow(val id: Int, val liked: Boolean)
 }

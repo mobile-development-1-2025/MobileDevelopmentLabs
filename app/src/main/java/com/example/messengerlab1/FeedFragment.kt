@@ -15,9 +15,16 @@ class FeedFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val vm: FeedViewModel by activityViewModels()
-    private val adapter = MessageAdapter()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    private val adapter = MessageAdapter { msg ->
+        vm.toggleLike(msg)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentFeedBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -30,14 +37,6 @@ class FeedFragment : Fragment() {
 
         vm.messages.observe(viewLifecycleOwner) { list ->
             adapter.submit(list)
-        }
-
-        vm.loading.observe(viewLifecycleOwner) { loading ->
-            binding.progress.visibility = if (loading) View.VISIBLE else View.GONE
-        }
-
-        binding.btnRefresh.setOnClickListener {
-            vm.refresh()
         }
     }
 

@@ -18,13 +18,26 @@ class MessageRepository(
 
     suspend fun refreshFromNetworkOrFallback(): List<MessageEntity> {
         return try {
+            val likedMap = dao.getLikedMap().associate { it.id to it.liked }
+
             val remote = RetrofitClient.api.getMessages()
-            val entities = remote.map { MessageEntity(it.id, it.title, it.body) }
-            dao.clear()
+            val entities = remote.map {
+                MessageEntity(
+                    id = it.id,
+                    title = it.title,
+                    body = it.body,
+                    liked = likedMap[it.id] ?: false
+                )
+            }
+
             dao.insertAll(entities)
             dao.getAll()
         } catch (e: Exception) {
             dao.getAll()
         }
+    }
+
+    suspend fun setLiked(id: Int, liked: Boolean) {
+        dao.setLiked(id, liked)
     }
 }

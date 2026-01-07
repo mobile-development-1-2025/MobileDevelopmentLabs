@@ -39,4 +39,11 @@ class FeedViewModel(app: Application) : AndroidViewModel(app) {
         super.onCleared()
         Log.d("VM", "FeedViewModel onCleared")
     }
+
+    fun toggleLike(item: MessageEntity) {
+        viewModelScope.launch {
+            repo.setLiked(item.id, !item.liked)
+            _messages.value = repo.getMessages(forceRefresh = false)
+        }
+    }
 }
