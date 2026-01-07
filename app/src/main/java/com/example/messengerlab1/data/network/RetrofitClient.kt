@@ -1,4 +1,4 @@
-package com.example.messengerlab1.data.api
+package com.example.messengerlab1.data.network
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

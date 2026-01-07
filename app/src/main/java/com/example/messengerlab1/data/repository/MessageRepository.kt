@@ -1,8 +1,8 @@
-package com.example.messengerlab1.data
+package com.example.messengerlab1.data.repository
 
-import com.example.messengerlab1.data.api.RetrofitClient
 import com.example.messengerlab1.data.db.MessageDao
 import com.example.messengerlab1.data.db.MessageEntity
+import com.example.messengerlab1.data.network.RetrofitClient
 
 class MessageRepository(
     private val dao: MessageDao

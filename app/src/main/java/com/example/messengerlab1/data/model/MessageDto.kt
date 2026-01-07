@@ -1,4 +1,4 @@
-package com.example.messengerlab1.data.api
+package com.example.messengerlab1.data.model
 
 data class MessageDto(
     val id: Int,

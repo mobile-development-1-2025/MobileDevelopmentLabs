@@ -1,9 +1,12 @@
-package com.example.messengerlab1
+package com.example.messengerlab1.ui.feed
 
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.*
-import com.example.messengerlab1.data.MessageRepository
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.example.messengerlab1.data.repository.MessageRepository
 import com.example.messengerlab1.data.db.AppDatabase
 import com.example.messengerlab1.data.db.MessageEntity
 import kotlinx.coroutines.launch
@@ -11,7 +14,7 @@ import kotlinx.coroutines.launch
 class FeedViewModel(app: Application) : AndroidViewModel(app) {
 
     private val repo = MessageRepository(
-        AppDatabase.get(app).messageDao()
+        AppDatabase.Companion.get(app).messageDao()
     )
 
     private val _messages = MutableLiveData<List<MessageEntity>>(emptyList())

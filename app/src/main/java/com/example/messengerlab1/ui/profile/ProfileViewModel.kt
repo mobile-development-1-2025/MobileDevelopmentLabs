@@ -1,4 +1,4 @@
-package com.example.messengerlab1
+package com.example.messengerlab1.ui.profile
 
 import android.util.Log
 import androidx.lifecycle.LiveData

@@ -1,4 +1,4 @@
-package com.example.messengerlab1
+package com.example.messengerlab1.ui.profile
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.messengerlab1.ui.profile.ProfileViewModel
 import com.example.messengerlab1.databinding.FragmentProfileBinding
+import com.google.android.material.textfield.TextInputEditText
 
 class ProfileFragment : Fragment() {
 
@@ -57,7 +59,7 @@ class ProfileFragment : Fragment() {
         etBio.isEnabled = enabled
     }
 
-    private fun setIfDifferent(editText: com.google.android.material.textfield.TextInputEditText, value: String) {
+    private fun setIfDifferent(editText: TextInputEditText, value: String) {
         val current = editText.text?.toString() ?: ""
         if (current != value) editText.setText(value)
     }

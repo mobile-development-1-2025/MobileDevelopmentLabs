@@ -1,5 +1,6 @@
-package com.example.messengerlab1
+package com.example.messengerlab1.util
 
+import android.R
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -26,7 +27,7 @@ object NotificationHelper {
         val nm = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         val n = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(android.R.drawable.stat_notify_sync)
+            .setSmallIcon(R.drawable.stat_notify_sync)
             .setContentTitle("Синхронизация")
             .setContentText("Новые данные получены")
             .setAutoCancel(true)

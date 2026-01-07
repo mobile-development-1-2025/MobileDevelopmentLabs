@@ -20,6 +20,10 @@ import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.example.messengerlab1.databinding.ActivityMainBinding
+import com.example.messengerlab1.ui.feed.FeedViewModel
+import com.example.messengerlab1.ui.settings.SettingsViewModel
+import com.example.messengerlab1.util.NotificationHelper
+import com.example.messengerlab1.worker.SyncWorker
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {

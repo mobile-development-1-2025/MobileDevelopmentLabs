@@ -1,13 +1,14 @@
-package com.example.messengerlab1
+package com.example.messengerlab1.ui.feed
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
-import com.example.messengerlab1.data.db.MessageEntity
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.example.messengerlab1.R
+import com.example.messengerlab1.data.db.MessageEntity
 
 class MessageAdapter(
     private val onLikeClick: (MessageEntity) -> Unit

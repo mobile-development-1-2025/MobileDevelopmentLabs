@@ -1,4 +1,4 @@
-package com.example.messengerlab1
+package com.example.messengerlab1.ui.feed
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.messengerlab1.ui.feed.FeedViewModel
+import com.example.messengerlab1.ui.feed.MessageAdapter
 import com.example.messengerlab1.databinding.FragmentFeedBinding
 
 class FeedFragment : Fragment() {

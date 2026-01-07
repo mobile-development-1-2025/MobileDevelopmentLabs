@@ -1,11 +1,13 @@
-package com.example.messengerlab1
+package com.example.messengerlab1.ui.settings
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.messengerlab1.ui.settings.SettingsViewModel
 import com.example.messengerlab1.databinding.FragmentSettingsBinding
 
 class SettingsFragment : Fragment() {
@@ -15,7 +17,7 @@ class SettingsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        android.util.Log.d("Lifecycle", "SettingsFragment onCreate")
+        Log.d("Lifecycle", "SettingsFragment onCreate")
     }
 
     override fun onCreateView(
@@ -47,6 +49,6 @@ class SettingsFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        android.util.Log.d("Lifecycle", "SettingsFragment onDestroy")
+        Log.d("Lifecycle", "SettingsFragment onDestroy")
     }
 }
