@@ -1,39 +1,48 @@
 package com.example.messengerlab1
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.messengerlab1.databinding.FragmentFeedBinding
 
 class FeedFragment : Fragment() {
+
     private var _binding: FragmentFeedBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Log.d("Lifecycle", "FeedFragment onCreate")
-    }
+    private val vm: FeedViewModel by activityViewModels()
+    private val adapter = MessageAdapter()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentFeedBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onStart() { super.onStart(); Log.d("Lifecycle", "FeedFragment onStart") }
-    override fun onResume() { super.onResume(); Log.d("Lifecycle", "FeedFragment onResume") }
-    override fun onPause() { super.onPause(); Log.d("Lifecycle", "FeedFragment onPause") }
-    override fun onStop() { super.onStop(); Log.d("Lifecycle", "FeedFragment onStop") }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.rvFeed.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvFeed.adapter = adapter
+
+        vm.messages.observe(viewLifecycleOwner) { list ->
+            adapter.submit(list)
+        }
+
+        vm.loading.observe(viewLifecycleOwner) { loading ->
+            binding.progress.visibility = if (loading) View.VISIBLE else View.GONE
+        }
+
+        binding.btnRefresh.setOnClickListener {
+            vm.refresh()
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("Lifecycle", "FeedFragment onDestroy")
     }
 }
