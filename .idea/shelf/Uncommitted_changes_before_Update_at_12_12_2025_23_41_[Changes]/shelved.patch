@@ -1,0 +1,439 @@
+Index: VsemK/app/src/main/java/com/example/vsemk/ui/settings/SettingsFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.vsemk.ui.settings\r\n\r\nimport android.os.Bundle\r\nimport android.util.Log\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport android.widget.LinearLayout\r\nimport android.widget.Switch\r\nimport android.widget.TextView\r\nimport androidx.fragment.app.Fragment\r\n\r\nclass SettingsFragment : Fragment() {\r\n\r\n    override fun onCreateView(\r\n        inflater: LayoutInflater,\r\n        container: ViewGroup?,\r\n        savedInstanceState: Bundle?\r\n    ): View {\r\n        Log.d(\"SettingsFragment\", \"onCreateView\")\r\n\r\n        val layout = LinearLayout(requireContext()).apply {\r\n            orientation = LinearLayout.VERTICAL\r\n            setPadding(32, 32, 32, 32)\r\n        }\r\n\r\n        layout.addView(TextView(requireContext()).apply {\r\n            text = \"Настройки\"\r\n            textSize = 18f\r\n        })\r\n\r\n        layout.addView(Switch(requireContext()).apply {\r\n            text = \"Тёмная тема\"\r\n        })\r\n\r\n        return layout\r\n    }\r\n\r\n    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {\r\n        super.onViewCreated(view, savedInstanceState)\r\n        Log.d(\"SettingsFragment\", \"onViewCreated\")\r\n    }\r\n\r\n    override fun onStart() {\r\n        super.onStart()\r\n        Log.d(\"SettingsFragment\", \"onStart\")\r\n    }\r\n\r\n    override fun onResume() {\r\n        super.onResume()\r\n        Log.d(\"SettingsFragment\", \"onResume\")\r\n    }\r\n\r\n    override fun onPause() {\r\n        super.onPause()\r\n        Log.d(\"SettingsFragment\", \"onPause\")\r\n    }\r\n\r\n    override fun onStop() {\r\n        super.onStop()\r\n        Log.d(\"SettingsFragment\", \"onStop\")\r\n    }\r\n\r\n    override fun onDestroyView() {\r\n        super.onDestroyView()\r\n        Log.d(\"SettingsFragment\", \"onDestroyView\")\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/VsemK/app/src/main/java/com/example/vsemk/ui/settings/SettingsFragment.kt b/VsemK/app/src/main/java/com/example/vsemk/ui/settings/SettingsFragment.kt
+--- a/VsemK/app/src/main/java/com/example/vsemk/ui/settings/SettingsFragment.kt	(revision c73078753e1ecb980752c5c977fd081434de4df6)
++++ b/VsemK/app/src/main/java/com/example/vsemk/ui/settings/SettingsFragment.kt	(date 1765540184203)
+@@ -5,40 +5,54 @@
+ import android.view.LayoutInflater
+ import android.view.View
+ import android.view.ViewGroup
+-import android.widget.LinearLayout
+ import android.widget.Switch
+-import android.widget.TextView
+ import androidx.fragment.app.Fragment
++import androidx.fragment.app.activityViewModels
++import com.example.vsemk.R
++import com.example.vsemk.UserViewModel
+ 
+ class SettingsFragment : Fragment() {
+ 
++    private val userViewModel: UserViewModel by activityViewModels()
++
++    private var themeSwitch: Switch? = null
++
+     override fun onCreateView(
+         inflater: LayoutInflater,
+         container: ViewGroup?,
+         savedInstanceState: Bundle?
+     ): View {
+         Log.d("SettingsFragment", "onCreateView")
+-
+-        val layout = LinearLayout(requireContext()).apply {
+-            orientation = LinearLayout.VERTICAL
+-            setPadding(32, 32, 32, 32)
+-        }
+-
+-        layout.addView(TextView(requireContext()).apply {
+-            text = "Настройки"
+-            textSize = 18f
+-        })
+-
+-        layout.addView(Switch(requireContext()).apply {
+-            text = "Тёмная тема"
+-        })
+-
+-        return layout
++        return inflater.inflate(R.layout.fragment_settings, container, false)
+     }
+ 
+     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+         super.onViewCreated(view, savedInstanceState)
+         Log.d("SettingsFragment", "onViewCreated")
++
++        themeSwitch = view.findViewById(R.id.themeSwitch)
++
++        setupObservers()
++        setupListeners()
++    }
++
++    private fun setupObservers() {
++        userViewModel.isDarkTheme.observe(viewLifecycleOwner) { isDark ->
++            val switch = themeSwitch ?: return@observe
++            if (switch.isChecked != isDark) {
++                switch.setOnCheckedChangeListener(null)
++                switch.isChecked = isDark
++                switch.setOnCheckedChangeListener { _, isChecked ->
++                    userViewModel.setDarkTheme(isChecked)
++                }
++            }
++        }
++    }
++
++    private fun setupListeners() {
++        themeSwitch?.setOnCheckedChangeListener { _, isChecked ->
++            userViewModel.setDarkTheme(isChecked)
++        }
+     }
+ 
+     override fun onStart() {
+@@ -64,5 +78,6 @@
+     override fun onDestroyView() {
+         super.onDestroyView()
+         Log.d("SettingsFragment", "onDestroyView")
++        themeSwitch = null
+     }
+ }
+\ No newline at end of file
+Index: VsemK/app/src/main/res/layout/fragment_profile.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/VsemK/app/src/main/res/layout/fragment_profile.xml b/VsemK/app/src/main/res/layout/fragment_profile.xml
+new file mode 100644
+--- /dev/null	(date 1765541387864)
++++ b/VsemK/app/src/main/res/layout/fragment_profile.xml	(date 1765541387864)
+@@ -0,0 +1,60 @@
++<?xml version="1.0" encoding="utf-8"?>
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:orientation="vertical"
++    android:padding="24dp">
++
++    <TextView
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:text="Профиль"
++        android:textSize="24sp"
++        android:textStyle="bold"
++        android:layout_marginBottom="32dp" />
++
++    <TextView
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:text="Имя"
++        android:textSize="16sp"
++        android:layout_marginBottom="8dp" />
++
++    <com.google.android.material.textfield.TextInputLayout
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_marginBottom="24dp"
++        android:hint="Введите имя">
++
++        <com.google.android.material.textfield.TextInputEditText
++            android:id="@+id/et_user_name"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:inputType="textPersonName"
++            android:maxLines="1" />
++
++    </com.google.android.material.textfield.TextInputLayout>
++
++    <TextView
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:text="Статус"
++        android:textSize="16sp"
++        android:layout_marginBottom="8dp" />
++
++    <com.google.android.material.textfield.TextInputLayout
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:hint="Введите статус">
++
++        <com.google.android.material.textfield.TextInputEditText
++            android:id="@+id/et_user_status"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:inputType="text"
++            android:maxLines="3" />
++
++    </com.google.android.material.textfield.TextInputLayout>
++
++</LinearLayout>
++
+Index: VsemK/app/build.gradle.kts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    alias(libs.plugins.android.application)\r\n    alias(libs.plugins.kotlin.android)\r\n}\r\n\r\nandroid {\r\n    namespace = \"com.example.vsemk\"\r\n    compileSdk = 36\r\n\r\n    defaultConfig {\r\n        applicationId = \"com.example.vsemk\"\r\n        minSdk = 24\r\n        targetSdk = 36\r\n        versionCode = 1\r\n        versionName = \"1.0\"\r\n\r\n        testInstrumentationRunner = \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            isMinifyEnabled = false\r\n            proguardFiles(\r\n                getDefaultProguardFile(\"proguard-android-optimize.txt\"),\r\n                \"proguard-rules.pro\"\r\n            )\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility = JavaVersion.VERSION_11\r\n        targetCompatibility = JavaVersion.VERSION_11\r\n    }\r\n    kotlinOptions {\r\n        jvmTarget = \"11\"\r\n    }\r\n}\r\n\r\ndependencies {\r\n    implementation(libs.androidx.core.ktx)\r\n    implementation(libs.androidx.appcompat)\r\n    implementation(libs.material)\r\n\r\n\r\n    implementation(\"androidx.navigation:navigation-fragment-ktx:2.8.3\")\r\n    implementation(\"androidx.navigation:navigation-ui-ktx:2.8.3\")\r\n\r\n    testImplementation(libs.junit)\r\n    androidTestImplementation(libs.androidx.junit)\r\n    androidTestImplementation(libs.androidx.espresso.core)\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/VsemK/app/build.gradle.kts b/VsemK/app/build.gradle.kts
+--- a/VsemK/app/build.gradle.kts	(revision c73078753e1ecb980752c5c977fd081434de4df6)
++++ b/VsemK/app/build.gradle.kts	(date 1765541387864)
+@@ -43,6 +43,12 @@
+ 
+     implementation("androidx.navigation:navigation-fragment-ktx:2.8.3")
+     implementation("androidx.navigation:navigation-ui-ktx:2.8.3")
++    
++    // ViewModel and LiveData
++    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
++    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
++    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
++    implementation("androidx.fragment:fragment-ktx:1.6.2")
+ 
+     testImplementation(libs.junit)
+     androidTestImplementation(libs.androidx.junit)
+Index: VsemK/app/src/main/java/com/example/vsemk/ui/profile/ProfileFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.vsemk.ui.profile\r\n\r\nimport android.os.Bundle\r\nimport android.util.Log\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport android.widget.TextView\r\nimport androidx.fragment.app.Fragment\r\n\r\nclass ProfileFragment : Fragment() {\r\n\r\n    override fun onCreateView(\r\n        inflater: LayoutInflater,\r\n        container: ViewGroup?,\r\n        savedInstanceState: Bundle?\r\n    ): View? {\r\n        Log.d(\"ProfileFragment\", \"onCreateView\")\r\n        return TextView(requireContext()).apply {\r\n            text = \"Имя: Семен\\nTg: https://t.me/Semenyshka\"\r\n            setPadding(32, 32, 32, 32)\r\n        }\r\n    }\r\n\r\n    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {\r\n        super.onViewCreated(view, savedInstanceState)\r\n        Log.d(\"ProfileFragment\", \"onViewCreated\")\r\n    }\r\n\r\n    override fun onStart() {\r\n        super.onStart()\r\n        Log.d(\"ProfileFragment\", \"onStart\")\r\n    }\r\n\r\n    override fun onResume() {\r\n        super.onResume()\r\n        Log.d(\"ProfileFragment\", \"onResume\")\r\n    }\r\n\r\n    override fun onPause() {\r\n        super.onPause()\r\n        Log.d(\"ProfileFragment\", \"onPause\")\r\n    }\r\n\r\n    override fun onStop() {\r\n        super.onStop()\r\n        Log.d(\"ProfileFragment\", \"onStop\")\r\n    }\r\n\r\n    override fun onDestroyView() {\r\n        super.onDestroyView()\r\n        Log.d(\"ProfileFragment\", \"onDestroyView\")\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/VsemK/app/src/main/java/com/example/vsemk/ui/profile/ProfileFragment.kt b/VsemK/app/src/main/java/com/example/vsemk/ui/profile/ProfileFragment.kt
+--- a/VsemK/app/src/main/java/com/example/vsemk/ui/profile/ProfileFragment.kt	(revision c73078753e1ecb980752c5c977fd081434de4df6)
++++ b/VsemK/app/src/main/java/com/example/vsemk/ui/profile/ProfileFragment.kt	(date 1765540184203)
+@@ -5,26 +5,77 @@
+ import android.view.LayoutInflater
+ import android.view.View
+ import android.view.ViewGroup
++import android.widget.EditText
+ import android.widget.TextView
++import androidx.core.widget.addTextChangedListener
+ import androidx.fragment.app.Fragment
++import androidx.fragment.app.activityViewModels
++import com.example.vsemk.R
++import com.example.vsemk.UserViewModel
+ 
+ class ProfileFragment : Fragment() {
+ 
++    private val userViewModel: UserViewModel by activityViewModels()
++
++    private var nameInput: EditText? = null
++    private var statusInput: EditText? = null
++    private var previewText: TextView? = null
++
+     override fun onCreateView(
+         inflater: LayoutInflater,
+         container: ViewGroup?,
+         savedInstanceState: Bundle?
+-    ): View? {
++    ): View {
+         Log.d("ProfileFragment", "onCreateView")
+-        return TextView(requireContext()).apply {
+-            text = "Имя: Семен\nTg: https://t.me/Semenyshka"
+-            setPadding(32, 32, 32, 32)
+-        }
++        return inflater.inflate(R.layout.fragment_profile, container, false)
+     }
+ 
+     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+         super.onViewCreated(view, savedInstanceState)
+         Log.d("ProfileFragment", "onViewCreated")
++
++        nameInput = view.findViewById(R.id.nameInput)
++        statusInput = view.findViewById(R.id.statusInput)
++        previewText = view.findViewById(R.id.profilePreview)
++
++        setupObservers()
++        setupListeners()
++    }
++
++    private fun setupObservers() {
++        userViewModel.userName.observe(viewLifecycleOwner) { name ->
++            if (nameInput?.text.toString() != name) {
++                nameInput?.setText(name)
++            }
++            updatePreview(name, userViewModel.status.value.orEmpty())
++        }
++
++        userViewModel.status.observe(viewLifecycleOwner) { status ->
++            if (statusInput?.text.toString() != status) {
++                statusInput?.setText(status)
++            }
++            updatePreview(userViewModel.userName.value.orEmpty(), status)
++        }
++    }
++
++    private fun setupListeners() {
++        nameInput?.addTextChangedListener { editable ->
++            val text = editable?.toString().orEmpty()
++            if (text != userViewModel.userName.value) {
++                userViewModel.updateName(text)
++            }
++        }
++
++        statusInput?.addTextChangedListener { editable ->
++            val text = editable?.toString().orEmpty()
++            if (text != userViewModel.status.value) {
++                userViewModel.updateStatus(text)
++            }
++        }
++    }
++
++    private fun updatePreview(name: String, status: String) {
++        previewText?.text = "Имя: $name\nСтатус: $status"
+     }
+ 
+     override fun onStart() {
+@@ -50,5 +101,8 @@
+     override fun onDestroyView() {
+         super.onDestroyView()
+         Log.d("ProfileFragment", "onDestroyView")
++        nameInput = null
++        statusInput = null
++        previewText = null
+     }
+ }
+\ No newline at end of file
+Index: VsemK/app/src/main/res/layout/fragment_settings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/VsemK/app/src/main/res/layout/fragment_settings.xml b/VsemK/app/src/main/res/layout/fragment_settings.xml
+new file mode 100644
+--- /dev/null	(date 1765541387865)
++++ b/VsemK/app/src/main/res/layout/fragment_settings.xml	(date 1765541387865)
+@@ -0,0 +1,37 @@
++<?xml version="1.0" encoding="utf-8"?>
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:orientation="vertical"
++    android:padding="24dp">
++
++    <TextView
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:text="Настройки"
++        android:textSize="24sp"
++        android:textStyle="bold"
++        android:layout_marginBottom="32dp" />
++
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:orientation="horizontal"
++        android:gravity="center_vertical">
++
++        <TextView
++            android:layout_width="0dp"
++            android:layout_height="wrap_content"
++            android:layout_weight="1"
++            android:text="Тёмная тема"
++            android:textSize="16sp" />
++
++        <com.google.android.material.switchmaterial.SwitchMaterial
++            android:id="@+id/switch_theme"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content" />
++
++    </LinearLayout>
++
++</LinearLayout>
++
+Index: VsemK/app/src/main/java/com/example/vsemk/ui/profile/ProfileViewModel.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/VsemK/app/src/main/java/com/example/vsemk/ui/profile/ProfileViewModel.kt b/VsemK/app/src/main/java/com/example/vsemk/ui/profile/ProfileViewModel.kt
+new file mode 100644
+--- /dev/null	(date 1765542967682)
++++ b/VsemK/app/src/main/java/com/example/vsemk/ui/profile/ProfileViewModel.kt	(date 1765542967682)
+@@ -0,0 +1,44 @@
++package com.example.vsemk.ui.profile
++
++import android.util.Log
++import androidx.lifecycle.LiveData
++import androidx.lifecycle.MutableLiveData
++import androidx.lifecycle.ViewModel
++
++class ProfileViewModel : ViewModel() {
++
++    companion object {
++        private const val TAG = "ProfileViewModel"
++    }
++
++    private val _userName = MutableLiveData<String>().apply {
++        value = "Семен"
++    }
++    val userName: LiveData<String> = _userName
++
++    private val _userStatus = MutableLiveData<String>().apply {
++        value = "https://t.me/Semenyshka"
++    }
++    val userStatus: LiveData<String> = _userStatus
++
++
++    fun updateUserName(name: String) {
++        Log.d(TAG, "updateUserName: $name")
++        _userName.value = name
++    }
++
++    fun updateUserStatus(status: String) {
++        Log.d(TAG, "updateUserStatus: $status")
++        _userStatus.value = status
++    }
++
++    override fun onCleared() {
++        super.onCleared()
++        Log.d(TAG, "onCleared: ViewModel уничтожена")
++    }
++
++    init {
++        Log.d(TAG, "init: ViewModel создана")
++    }
++}
++
+Index: VsemK/app/src/main/java/com/example/vsemk/ui/settings/SettingsViewModel.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/VsemK/app/src/main/java/com/example/vsemk/ui/settings/SettingsViewModel.kt b/VsemK/app/src/main/java/com/example/vsemk/ui/settings/SettingsViewModel.kt
+new file mode 100644
+--- /dev/null	(date 1765542967622)
++++ b/VsemK/app/src/main/java/com/example/vsemk/ui/settings/SettingsViewModel.kt	(date 1765542967622)
+@@ -0,0 +1,41 @@
++package com.example.vsemk.ui.settings
++
++import android.util.Log
++import androidx.lifecycle.LiveData
++import androidx.lifecycle.MutableLiveData
++import androidx.lifecycle.ViewModel
++
++class SettingsViewModel : ViewModel() {
++
++    companion object {
++        private const val TAG = "SettingsViewModel"
++    }
++
++    private val _isDarkTheme = MutableLiveData<Boolean>().apply {
++        value = false
++    }
++    val isDarkTheme: LiveData<Boolean> = _isDarkTheme
++
++
++    fun toggleTheme() {
++        val newValue = !(_isDarkTheme.value ?: false)
++        Log.d(TAG, "toggleTheme: $newValue")
++        _isDarkTheme.value = newValue
++    }
++
++
++    fun setDarkTheme(isDark: Boolean) {
++        Log.d(TAG, "setDarkTheme: $isDark")
++        _isDarkTheme.value = isDark
++    }
++
++    override fun onCleared() {
++        super.onCleared()
++        Log.d(TAG, "onCleared: ViewModel уничтожена")
++    }
++
++    init {
++        Log.d(TAG, "init: ViewModel создана")
++    }
++}
++
