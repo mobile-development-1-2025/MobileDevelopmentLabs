@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="message_incoming_bg">#F1F1F1</color>
+    <color name="message_outgoing_bg">#CFE9FF</color>
+    <color name="like_active">#F44336</color>
+    <color name="like_inactive">#757575</color>
+</resources>
