@@ -36,33 +36,66 @@
         app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
-        android:id="@+id/profile_name"
+        android:id="@+id/label_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Иван Иванов"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:text="Имя:"
+        android:textSize="16sp"
         android:textColor="@android:color/black"
-        app:layout_constraintBottom_toTopOf="@+id/profile_status"
+        app:layout_constraintBottom_toTopOf="@+id/profile_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_avatar"
         app:layout_constraintVertical_chainStyle="packed" />
 
+    <EditText
+        android:id="@+id/profile_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Введите имя"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:inputType="textPersonName"
+        android:imeOptions="actionNext"
+        app:layout_constraintBottom_toTopOf="@+id/label_status"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_name" />
+
     <TextView
-        android:id="@+id/profile_status"
+        android:id="@+id/label_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="В сети"
+        android:layout_marginTop="16dp"
+        android:text="Статус:"
         android:textSize="16sp"
-        android:textColor="@android:color/holo_green_dark"
-        app:layout_constraintBottom_toTopOf="@+id/profile_info"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toTopOf="@+id/profile_status"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_name"
         app:layout_constraintVertical_chainStyle="packed" />
+
+    <EditText
+        android:id="@+id/profile_status"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Введите статус"
+        android:textSize="16sp"
+        android:textColor="@android:color/holo_green_dark"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/profile_info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_status" />
 
     <TextView
         android:id="@+id/profile_info"

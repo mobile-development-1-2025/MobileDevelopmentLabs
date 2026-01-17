@@ -5,9 +5,12 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.messenger.viewmodel.SettingsViewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,27 +20,47 @@ class MainActivity : AppCompatActivity() {
         private const val KEY_DARK_THEME = "dark_theme"
     }
 
+    private lateinit var settingsViewModel: SettingsViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "onCreate called")
         
-        // Применяем сохраненную тему
-        applySavedTheme()
+        settingsViewModel = ViewModelProvider(this)[SettingsViewModel::class.java]
+        
+        loadSavedTheme()
+        observeThemeChanges()
+        applyTheme(settingsViewModel.isDarkTheme.value ?: false)
         
         setContentView(R.layout.activity_main)
         
         setupBottomNavigation()
     }
 
-    private fun applySavedTheme() {
+    private fun loadSavedTheme() {
         val sharedPreferences = getSharedPreferences(PREFS_NAME, 0)
         val isDarkTheme = sharedPreferences.getBoolean(KEY_DARK_THEME, false)
-        
+        settingsViewModel.setDarkTheme(isDarkTheme)
+    }
+
+    private fun observeThemeChanges() {
+        settingsViewModel.isDarkTheme.observe(this) { isDarkTheme ->
+            applyTheme(isDarkTheme)
+            saveTheme(isDarkTheme)
+        }
+    }
+
+    private fun applyTheme(isDarkTheme: Boolean) {
         if (isDarkTheme) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
+    }
+
+    private fun saveTheme(isDarkTheme: Boolean) {
+        val sharedPreferences = getSharedPreferences(PREFS_NAME, 0)
+        sharedPreferences.edit().putBoolean(KEY_DARK_THEME, isDarkTheme).apply()
     }
 
     private fun setupBottomNavigation() {
