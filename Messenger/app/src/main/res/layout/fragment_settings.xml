@@ -14,7 +14,7 @@
         android:text="Настройки"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="@android:color/black"
+        android:textColor="?android:attr/textColorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/theme_switch_container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +40,7 @@
             android:layout_weight="1"
             android:text="Темная тема"
             android:textSize="18sp"
-            android:textColor="@android:color/black" />
+            android:textColor="?android:attr/textColorPrimary" />
 
         <Switch
             android:id="@+id/theme_switch"
@@ -57,7 +57,7 @@
         android:layout_marginTop="32dp"
         android:lineSpacingExtra="4dp"
         android:text="Другие настройки:\n• Уведомления\n• Безопасность\n• Язык\n"
-        android:textColor="@android:color/black"
+        android:textColor="?android:attr/textColorPrimary"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

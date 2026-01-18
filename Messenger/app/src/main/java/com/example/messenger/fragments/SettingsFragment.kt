@@ -1,31 +1,30 @@
 package com.example.messenger.fragments
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Switch
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.observe
 import com.example.messenger.R
+import com.example.messenger.viewmodel.SettingsViewModel
 
 class SettingsFragment : Fragment() {
 
     companion object {
         private const val TAG = "SettingsFragment"
-        private const val PREFS_NAME = "messenger_prefs"
-        private const val KEY_DARK_THEME = "dark_theme"
     }
 
-    private lateinit var sharedPreferences: SharedPreferences
+    private val viewModel: SettingsViewModel by activityViewModels()
     private lateinit var themeSwitch: Switch
+    private var isUpdatingFromViewModel = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "onCreate called")
-        sharedPreferences = requireContext().getSharedPreferences(PREFS_NAME, 0)
     }
 
     override fun onCreateView(
@@ -46,22 +45,18 @@ class SettingsFragment : Fragment() {
     }
 
     private fun setupThemeSwitch() {
-        // Загружаем сохраненное состояние темы
-        val isDarkTheme = sharedPreferences.getBoolean(KEY_DARK_THEME, false)
-        themeSwitch.isChecked = isDarkTheme
-        
-        // Устанавливаем слушатель для переключения темы
+        viewModel.isDarkTheme.observe(viewLifecycleOwner) { isDarkTheme ->
+            if (!isUpdatingFromViewModel && themeSwitch.isChecked != isDarkTheme) {
+                isUpdatingFromViewModel = true
+                themeSwitch.isChecked = isDarkTheme
+                isUpdatingFromViewModel = false
+            }
+        }
+
         themeSwitch.setOnCheckedChangeListener { _, isChecked ->
-            Log.d(TAG, "Theme switch changed: $isChecked")
-            
-            // Сохраняем состояние темы
-            sharedPreferences.edit().putBoolean(KEY_DARK_THEME, isChecked).apply()
-            
-            // Применяем тему
-            if (isChecked) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            if (!isUpdatingFromViewModel) {
+                Log.d(TAG, "Theme switch changed: $isChecked")
+                viewModel.setDarkTheme(isChecked)
             }
         }
     }
