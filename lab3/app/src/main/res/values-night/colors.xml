@@ -1,0 +1,9 @@
+<resources>
+    <color name="colorPrimary">#1E2632</color>
+    <color name="colorPrimaryVariant">#0F141A</color>
+    <color name="colorAccent">#4CC3FF</color>
+    <color name="bottom_nav_background">#0F141A</color>
+    <color name="bottom_nav_item_checked">#4CC3FF</color>
+    <color name="bottom_nav_item_unchecked">#A9B3BE</color>
+    <color name="textPrimary">#F5F7FA</color>
+</resources>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bottom_nav_background">#FFFFFF</color>
+    <color name="bottom_nav_item_checked">#00A6FB</color>
+    <color name="bottom_nav_item_unchecked">#5C6B7A</color>
+    <color name="colorAccent">#00A6FB</color>
+    <color name="colorPrimary">#2D3A4B</color>
+    <color name="colorPrimaryVariant">#1E2632</color>
+    <color name="textPrimary">#111827</color>
+    <string name="app_name">Messenger Lab 3</string>
+    <string name="news_empty">Сообщений пока нет.</string>
+    <string name="news_placeholder">Здесь появятся ваши сообщения.</string>
+    <string name="news_refresh">Обновить</string>
+    <string name="news_tab">Лента</string>
+    <string name="news_title">Новостная лента</string>
+    <string name="profile_name_hint">Имя</string>
+    <string name="profile_status_hint">Статус</string>
+    <string name="profile_tab">Профиль</string>
+    <string name="profile_title">Профиль</string>
+    <string name="settings_tab">Настройки</string>
+    <string name="settings_theme_toggle">Темная тема</string>
+    <string name="settings_title">Настройки</string>
+    <style name="TextAppearance.Lab1.Body" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/textPrimary</item>
+    </style>
+    <style name="TextAppearance.Lab1.Subtitle" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:textColor">@color/textPrimary</item>
+    </style>
+    <style name="TextAppearance.Lab1.Title" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textColor">@color/textPrimary</item>
+    </style>
+    <style name="Theme.Lab1" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+        <item name="colorSecondary">@color/colorAccent</item>
+        <item name="android:statusBarColor">@color/colorPrimaryVariant</item>
+    </style>
+</resources>
