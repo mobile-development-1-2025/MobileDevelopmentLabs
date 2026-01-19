@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Messenger Lab 4</string>
+
+    <string name="news_tab">Лента</string>
+    <string name="profile_tab">Профиль</string>
+    <string name="settings_tab">Настройки</string>
+
+    <string name="news_title">Новостная лента</string>
+    <string name="news_placeholder">Здесь появятся ваши сообщения.</string>
+    <string name="news_refresh">Обновить</string>
+    <string name="news_empty">Сообщений пока нет.</string>
+    <string name="news_sync_channel">Синхронизация</string>
+    <string name="news_sync_message">Новые данные получены</string>
+
+    <string name="profile_title">Профиль</string>
+    <string name="profile_name_hint">Имя</string>
+    <string name="profile_status_hint">Статус</string>
+
+    <string name="settings_title">Настройки</string>
+    <string name="settings_theme_toggle">Темная тема</string>
+    <string name="settings_offline_toggle">Оффлайн режим</string>
+</resources>

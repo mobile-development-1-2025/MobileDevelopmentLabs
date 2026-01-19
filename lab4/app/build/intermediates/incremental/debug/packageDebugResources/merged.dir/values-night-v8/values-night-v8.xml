@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bottom_nav_background">#0F141A</color>
+    <color name="bottom_nav_item_checked">#4CC3FF</color>
+    <color name="bottom_nav_item_unchecked">#A9B3BE</color>
+    <color name="colorAccent">#4CC3FF</color>
+    <color name="colorPrimary">#1E2632</color>
+    <color name="colorPrimaryVariant">#0F141A</color>
+    <color name="textPrimary">#F5F7FA</color>
+    <style name="Theme.Lab1" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+        <item name="colorSecondary">@color/colorAccent</item>
+        <item name="android:statusBarColor">@color/colorPrimaryVariant</item>
+    </style>
+</resources>
