@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/authFragment">
+
+    <action
+        android:id="@+id/startAuthFragmentClear"
+        app:destination="@id/authFragment"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out"
+        app:popUpTo="@id/authFragment"
+        app:popUpToInclusive="true" />
+
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="com.privatemessenger.app.screens.auth.AuthFragment"
+        android:label="fragment_auth"
+        tools:layout="@layout/fragment_auth" />
+
+    <action
+        android:id="@+id/startChatListFragment"
+        app:destination="@id/chatListFragment"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out" />
+
+    <fragment
+        android:id="@+id/chatListFragment"
+        android:name="com.privatemessenger.app.screens.chatList.ChatListFragment"
+        android:label="fragment_chat_list"
+        tools:layout="@layout/fragment_chat_list" />
+
+    <action
+        android:id="@+id/startUsersFragment"
+        app:destination="@id/usersFragment"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out" />
+
+    <fragment
+        android:id="@+id/usersFragment"
+        android:name="com.privatemessenger.app.screens.users.UsersFragment"
+        android:label="fragment_users"
+        tools:layout="@layout/fragment_users" />
+
+    <action
+        android:id="@+id/startChatFragment"
+        app:destination="@id/chatFragment"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out" />
+    <fragment
+        android:id="@+id/recorderFragment"
+        android:name="com.privatemessenger.app.screens.record.RecorderFragment"
+        tools:layout="@layout/fragment_recorder"
+        android:label="fragment_recorder"/>
+    <action
+        android:id="@+id/startRecorderFragment"
+        app:destination="@id/recorderFragment"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out"/>
+    <fragment
+        android:id="@+id/photoFragment"
+        android:name="com.privatemessenger.app.screens.record.PhotoFragment"
+        tools:layout="@layout/fragment_photo"
+        android:label="fragment_photo">
+        <argument
+            android:name="photo"
+            app:argType="string" />
+
+    </fragment>
+
+    <action
+        android:id="@+id/startPhotoFragment"
+        app:destination="@id/photoFragment"/>
+
+    <fragment
+        android:id="@+id/videoFragment"
+        android:name="com.privatemessenger.app.screens.record.VideoFragment"
+        tools:layout="@layout/fragment_video"
+        android:label="fragment_video">
+        <argument
+            android:name="video"
+            app:argType="string" />
+
+    </fragment>
+    <action
+        android:id="@+id/startVideoFragment"
+        app:destination="@id/videoFragment"/>
+
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.privatemessenger.app.screens.chat.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat">
+        <argument
+            android:name="peer"
+            app:argType="com.privatemessenger.app.screens.users.model.UserModel" />
+
+    </fragment>
+
+</navigation>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_marginEnd="@dimen/_12dp"
+        android:id="@+id/sent_message_card"
+        android:layout_width="0dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_12dp"
+        android:layout_marginTop="@dimen/_8dp"
+        app:cardBackgroundColor="@color/sent_message_bg_color"
+        app:cardCornerRadius="10dp"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeWidth="@dimen/_0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:padding="@dimen/_2dp"
+            android:paddingEnd="@dimen/_15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_marginEnd="@dimen/_10dp"
+                android:id="@+id/file_btn"
+                android:layout_width="@dimen/_40dp"
+                android:layout_height="@dimen/_40dp"
+                android:src="@drawable/ic_sent_file"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/sent_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+            <TextView
+
+                android:layout_marginEnd="@dimen/_25dp"
+                android:gravity="start"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/file_btn"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/sent_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:autoLink="all"
+                android:linksClickable="true"
+                android:paddingTop="@dimen/_3dp"
+                android:textColor="@color/white"
+                android:textIsSelectable="true"
+                android:textSize="@dimen/_16sp"
+                tools:text="File jpg" />
+
+            <TextView
+                android:layout_marginTop="@dimen/_5dp"
+                android:id="@+id/sent_text_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/_12dp"
+                android:paddingBottom="@dimen/_2dp"
+                android:textAlignment="textEnd"
+                android:textColor="@color/received_message_time_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sent_text"
+                tools:text="15:54" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

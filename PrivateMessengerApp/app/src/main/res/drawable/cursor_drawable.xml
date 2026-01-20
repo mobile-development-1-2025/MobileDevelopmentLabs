@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <size android:width="@dimen/_2dp" android:height="@dimen/_24dp" />
+            <corners android:radius="@dimen/_1dp" />
+            <solid android:color="@color/sent_message_icon_color" />
+        </shape>
+    </item>
+</selector>
