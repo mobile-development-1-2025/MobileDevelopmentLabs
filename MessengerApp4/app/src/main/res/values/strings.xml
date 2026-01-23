@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Мессенджер</string>
+    <string name="feed">Лента</string>
+    <string name="profile">Профиль</string>
+    <string name="settings">Настройки</string>
+    <string name="refresh">Обновить</string>
+    <string name="avatar">Аватар</string>
+    <string name="like">Лайк</string>
+    <string name="dislike">Дизлайк</string>
+    <string name="views">Просмотры</string>
+    <string name="profile_info">Информация профиля</string>
+    <string name="edit_profile">Редактировать профиль</string>
+    <string name="name">Имя</string>
+    <string name="status">Статус</string>
+    <string name="email">Email</string>
+    <string name="phone">Телефон</string>
+    <string name="new_name">Новое имя</string>
+    <string name="new_status">Новый статус</string>
+    <string name="save">Сохранить</string>
+    <string name="dark_theme">Темная тема</string>
+    <string name="dark_theme_desc">Переключить на темную тему</string>
+</resources>
