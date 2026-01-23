@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">MessengerApp</string>
-    <string name="feed">Лента</string>
-    <string name="profile">Профиль</string>
-    <string name="settings">Настройки</string>
-</resources>
