@@ -6,13 +6,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.messenger.R
+import com.example.messenger.data.Message
 
 class MessageAdapter(private var items: List<Message>) : RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
 
     class MessageViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val name: TextView = view.findViewById(R.id.item_user)
-        val email: TextView = view.findViewById(R.id.item_content)
-        val body: TextView = view.findViewById(R.id.item_timestamp)
+        val title: TextView = view.findViewById(R.id.item_user)
+        val body: TextView = view.findViewById(R.id.item_content)
+        val stats: TextView = view.findViewById(R.id.item_timestamp)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
@@ -22,9 +23,9 @@ class MessageAdapter(private var items: List<Message>) : RecyclerView.Adapter<Me
 
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
         val item = items[position]
-        holder.name.text = item.name
-        holder.email.text = item.email
-        holder.body.text = item.body
+        holder.title.text = item.name
+        holder.body.text = item.email
+        holder.stats.text = "👍 ${item.reactions} | 👁 ${item.views} | User: ${item.body}"
     }
 
     override fun getItemCount(): Int = items.size

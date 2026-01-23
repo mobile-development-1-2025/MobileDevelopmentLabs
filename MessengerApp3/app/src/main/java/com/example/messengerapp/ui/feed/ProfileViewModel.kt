@@ -9,7 +9,7 @@ data class ProfileData(
     val name: String = "Якунин Андрей",
     val status: String = "В сети",
     val email: String = "andrucrut@mail.ru",
-    val phone: String = "+89818203438"
+    val phone: String = "+79818203438"
 )
 
 class ProfileViewModel : ViewModel() {
