@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">MessengerApp</string>
+
+    <string-array name="languages_array">
+        <item>English</item>
+        <item>Русский</item>
+        <item>Deutsch</item>
+        <item>Español</item>
+    </string-array>
+
+</resources>
