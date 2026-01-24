@@ -1,5 +1,8 @@
 package com.example.myapplication
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -7,6 +10,8 @@ import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -15,12 +20,14 @@ import com.example.myapplication.adapter.MessageAdapter
 import com.example.myapplication.viewmodel.FeedViewModel
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.example.myapplication.utils.NetworkMonitor
 
 class FeedFragment : Fragment(R.layout.fragment_feed) {
 
     private lateinit var viewModel: FeedViewModel
     private lateinit var adapter: MessageAdapter
-
+    private lateinit var networkMonitor: NetworkMonitor
     private lateinit var recyclerView: RecyclerView
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var progressBar: ProgressBar
@@ -29,15 +36,43 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
     private lateinit var btnRetry: MaterialButton
     private lateinit var tvEmpty: TextView
     private lateinit var toolbar: MaterialToolbar
+    private lateinit var fabRefresh: FloatingActionButton
+
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        permissions.entries.forEach { entry ->
+            val permission = entry.key
+            val isGranted = entry.value
+
+            when (permission) {
+                Manifest.permission.POST_NOTIFICATIONS -> {
+                    if (isGranted) {
+                        Log.i("Permissions", "Уведомления разрешены")
+                        Toast.makeText(requireContext(), "Уведомления включены", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Log.w("Permissions", "Уведомления запрещены")
+                    }
+                }
+                Manifest.permission.READ_CONTACTS -> {
+                    if (isGranted) {
+                        Log.i("Permissions", "Контакты разрешены")
+                    }
+                }
+            }
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.i("Lifecycle", "FeedFragment onViewCreated")
         initViews(view)
+        requestPermissions()
         viewModel = ViewModelProvider(this)[FeedViewModel::class.java]
         setupRecyclerView()
         setupSwipeRefresh()
         setupToolbar()
+        setupFab()
         observeViewModel()
         btnRetry.setOnClickListener {
             viewModel.loadMessages()
@@ -53,16 +88,47 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
         btnRetry = view.findViewById(R.id.btnRetry)
         tvEmpty = view.findViewById(R.id.tvEmpty)
         toolbar = view.findViewById(R.id.toolbar)
+        fabRefresh = view.findViewById(R.id.fabRefresh)
+    }
+
+    private fun requestPermissions() {
+        val permissionsToRequest = mutableListOf<String>()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                permissionsToRequest.add(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        }
+
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.READ_CONTACTS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            permissionsToRequest.add(Manifest.permission.READ_CONTACTS)
+        }
+
+        if (permissionsToRequest.isNotEmpty()) {
+            requestPermissionLauncher.launch(permissionsToRequest.toTypedArray())
+        }
     }
 
     private fun setupRecyclerView() {
-        adapter = MessageAdapter { message ->
-            Toast.makeText(
-                requireContext(),
-                "Вы нажали на сообщение",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
+        adapter = MessageAdapter(
+            onItemClick = { message ->
+                Toast.makeText(
+                    requireContext(),
+                    "Clicked: ${message.title}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            },
+            onLikeClick = { message ->
+                viewModel.toggleLike(message.id, message.isLiked)
+            }
+        )
         recyclerView.adapter = adapter
     }
 
@@ -88,6 +154,29 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
                 else -> false
             }
         }
+    }
+
+    private fun setupFab() {
+        fabRefresh.setOnClickListener {
+            viewModel.refreshMessages()
+            fabRefresh.animate()
+                .rotation(360f)
+                .setDuration(500)
+                .withEndAction {
+                    fabRefresh.rotation = 0f
+                }
+                .start()
+        }
+
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (dy > 0 && fabRefresh.isShown) {
+                    fabRefresh.hide()
+                } else if (dy < 0 && !fabRefresh.isShown) {
+                    fabRefresh.show()
+                }
+            }
+        })
     }
 
     private fun observeViewModel() {

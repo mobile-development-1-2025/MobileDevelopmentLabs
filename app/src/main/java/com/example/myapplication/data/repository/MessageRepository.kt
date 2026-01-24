@@ -1,11 +1,9 @@
 package com.example.myapplication.data.repository
 
-import android.Manifest
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.Log
-import androidx.annotation.RequiresPermission
 import com.example.myapplication.data.local.AppDatabase
 import com.example.myapplication.data.local.entity.Message
 import com.example.myapplication.data.remote.RetrofitClient
@@ -15,19 +13,15 @@ class MessageRepository(private val context: Context) {
 
     private val messageDao = AppDatabase.getDatabase(context).messageDao()
     private val apiService = RetrofitClient.apiService
-
     val messages: Flow<List<Message>> = messageDao.getAllMessages()
 
-    @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
     private fun isNetworkAvailable(): Boolean {
-        val connectivityManager =
-            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val network = connectivityManager.activeNetwork ?: return false
         val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
         return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
 
-    @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
     suspend fun fetchMessages(forceRefresh: Boolean = false): NetworkResult<List<Message>> {
         return if (isNetworkAvailable()) {
             fetchMessagesFromNetwork()
@@ -77,5 +71,9 @@ class MessageRepository(private val context: Context) {
             Log.e("Repository", "Ошибка чтения из базы: ${e.message}")
             emptyList()
         }
+    }
+
+    suspend fun toggleLike(messageId: Int, isLiked: Boolean) {
+        messageDao.updateLikeStatus(messageId, isLiked)
     }
 }

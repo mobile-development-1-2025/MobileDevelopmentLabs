@@ -9,7 +9,7 @@ import com.example.myapplication.data.local.entity.Message
 
 @Database(
     entities = [Message::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {

@@ -88,6 +88,13 @@ class FeedViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun toggleLike(messageId: Int, currentLikeStatus: Boolean) {
+        viewModelScope.launch {
+            repository.toggleLike(messageId, !currentLikeStatus)
+            Log.i("ViewModel", "Лайк изменён: $messageId -> ${!currentLikeStatus}")
+        }
+    }
+
     override fun onCleared() {
         super.onCleared()
         Log.i("ViewModel", "FeedViewModel cleared")

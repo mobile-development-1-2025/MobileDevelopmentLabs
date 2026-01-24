@@ -10,5 +10,6 @@ data class Message(
     val userId: Int,
     val title: String,
     val body: String,
-    val timestamp: Long = System.currentTimeMillis()
+    val timestamp: Long = System.currentTimeMillis(),
+    val isLiked: Boolean = false
 )

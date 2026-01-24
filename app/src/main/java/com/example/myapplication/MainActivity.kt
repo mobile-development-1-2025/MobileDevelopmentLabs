@@ -2,21 +2,12 @@ package com.example.myapplication
 
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.myapplication.ui.theme.MyApplicationTheme
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.work.*
+import com.example.myapplication.worker.SyncMessagesWorker
+import java.util.concurrent.TimeUnit
 
 class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +17,17 @@ class MainActivity : BaseActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNav.setupWithNavController(navController)
+        startTestWorker()
+    }
+
+    private fun startTestWorker() {
+        val request = OneTimeWorkRequestBuilder<SyncMessagesWorker>()
+            .setInitialDelay(10, TimeUnit.SECONDS)
+            .build()
+
+        WorkManager.getInstance(this).enqueue(request)
+
+        Log.i("WorkManager", "ТЕСТ: воркер запущен из MainActivity")
     }
 
     override fun onStart() {
@@ -46,5 +48,32 @@ class MainActivity : BaseActivity() {
 
     override fun onDestroy() {
         super.onDestroy(); Log.i("Lifecycle", "MainActivity onDestroy")
+    }
+
+    // настоящий метод, но у него мин интервал - 15 минут
+    private fun setupPeriodicSync() {
+        val constraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
+
+        val syncRequest = PeriodicWorkRequestBuilder<SyncMessagesWorker>(
+            repeatInterval = 15,
+            repeatIntervalTimeUnit = TimeUnit.MINUTES
+        )
+            .setConstraints(constraints)
+            .setBackoffCriteria(
+                BackoffPolicy.LINEAR,
+                WorkRequest.MIN_BACKOFF_MILLIS,
+                TimeUnit.MILLISECONDS
+            )
+            .build()
+
+        WorkManager.getInstance(this).enqueueUniquePeriodicWork(
+            SyncMessagesWorker.WORK_NAME,
+            ExistingPeriodicWorkPolicy.KEEP,
+            syncRequest
+        )
+
+        Log.i("WorkManager", "Периодическая синхронизация настроена")
     }
 }

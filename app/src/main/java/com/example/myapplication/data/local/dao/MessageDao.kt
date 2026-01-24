@@ -27,4 +27,7 @@ interface MessageDao {
 
     @Query("SELECT COUNT(*) FROM messages")
     suspend fun getMessagesCount(): Int
+
+    @Query("UPDATE messages SET isLiked = :isLiked WHERE id = :messageId")
+    suspend fun updateLikeStatus(messageId: Int, isLiked: Boolean)
 }
