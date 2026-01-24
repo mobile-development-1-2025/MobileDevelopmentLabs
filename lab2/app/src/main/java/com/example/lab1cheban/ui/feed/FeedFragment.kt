@@ -6,22 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.messenger.R
 
 class FeedFragment : Fragment() {
 
     private val TAG = "FeedFragment"
+    private lateinit var viewModel: FeedViewModel
+    private lateinit var adapter: MessageAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "onCreate: Fragment создан")
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.d(TAG, "onCreateView: View создан")
         return inflater.inflate(R.layout.fragment_feed, container, false)
     }
@@ -29,6 +30,23 @@ class FeedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "onViewCreated: View готов к использованию")
+
+        viewModel = ViewModelProvider(this).get(FeedViewModel::class.java)
+
+        adapter = MessageAdapter(emptyList())
+
+        val recyclerView = view.findViewById<RecyclerView>(R.id.message_list)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.adapter = adapter
+
+        viewModel.messages.observe(viewLifecycleOwner) { messages ->
+            adapter.updateData(messages)
+            Log.d(TAG, "UI обновлен: получено ${messages.size} сообщений")
+        }
+
+        viewModel.currentPage.observe(viewLifecycleOwner) { page ->
+            Log.d(TAG, "UI обновлен: текущая страница = $page")
+        }
     }
 
     override fun onStart() {
