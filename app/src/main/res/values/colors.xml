@@ -6,4 +6,6 @@
     <color name="colorBackground">#FFF8F3</color>
     <color name="colorOnPrimary">#FFFFFF</color>
     <color name="colorOnBackground">#4E342E</color>
+    <color name="colorError">#B00020</color>
+    <color name="colorOnSurfaceVariant">#707070</color>
 </resources>

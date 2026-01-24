@@ -1,0 +1,67 @@
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardElevation="2dp"
+    app:cardCornerRadius="8dp"
+    app:cardBackgroundColor="?attr/colorSurface">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/tvUserId"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="User #1"
+                android:textSize="12sp"
+                android:textColor="?attr/colorPrimary"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvTimestamp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="01.01.2024 12:00"
+                android:textSize="11sp"
+                android:textColor="?android:attr/textColorSecondary"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvMessageTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Message Title"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="?android:attr/textColorPrimary"
+            android:layout_marginBottom="4dp"
+            android:maxLines="2"
+            android:ellipsize="end"/>
+
+        <TextView
+            android:id="@+id/tvMessageBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Message body text..."
+            android:textSize="14sp"
+            android:textColor="?android:attr/textColorSecondary"
+            android:maxLines="3"
+            android:ellipsize="end"/>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
