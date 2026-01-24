@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MaxMessenger</string>
+    <string name="feed">Лента</string>
+    <string name="profile">Профиль</string>
+    <string name="settings">Настройки</string>
+    <string name="like">Нравится</string>
+    <string name="refresh">Обновить</string>
+    <string name="offline_message">Нет подключения к интернету</string>
+    <string name="loading">Загрузка...</string>
+    <string name="sync_success">Новые данные получены</string>
+    <string name="permission_required">Требуются разрешения</string>
+    <string name="grant_permissions">Разрешить</string>
+</resources>
