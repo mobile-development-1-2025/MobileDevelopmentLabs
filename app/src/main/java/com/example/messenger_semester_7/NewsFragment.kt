@@ -20,7 +20,9 @@ class NewsFragment : Fragment() {
     private var _binding: FragmentNewsBinding? = null
     private val binding get() = _binding!!
     private val viewModel: NewsViewModel by viewModels()
-    private val messageAdapter = MessageAdapter()
+    private val messageAdapter = MessageAdapter { message ->
+        viewModel.toggleLike(message.id)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,7 +53,7 @@ class NewsFragment : Fragment() {
     }
 
     private fun setupListeners() {
-        binding.refreshButton.setOnClickListener {
+        binding.refreshFab.setOnClickListener {
             viewModel.refreshMessages()
         }
     }
@@ -61,8 +63,9 @@ class NewsFragment : Fragment() {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { state ->
                     messageAdapter.submitList(state.messages)
+                    messageAdapter.setLikedIds(state.likedIds)
                     binding.loadingIndicator.isVisible = state.isLoading
-                    binding.refreshButton.isEnabled = !state.isLoading
+                    binding.refreshFab.isEnabled = !state.isLoading
                     binding.offlineLabel.isVisible = state.isOffline
                     binding.errorText.isVisible = state.errorMessage != null
                     binding.errorText.text = state.errorMessage.orEmpty()

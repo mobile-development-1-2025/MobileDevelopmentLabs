@@ -3,7 +3,7 @@
     <string name="news_title">Новости</string>
     <string name="news_refresh">Обновить</string>
     <string name="news_offline">Нет сети, показываем сохраненные сообщения</string>
-    <string name="news_empty">Нет сообщений. Нажмите «Обновить».</string>
+    <string name="news_empty">Нет сообщений. Нажмите кнопку обновления.</string>
     <string name="news_error_default">Не удалось загрузить данные, покажем сохраненные</string>
     <string name="news_author_format">Автор #%1$d · Сообщение #%2$d</string>
     <string name="profile_title">Профиль</string>
@@ -19,4 +19,9 @@
     <string name="profile_status_hint">Введите статус</string>
     <string name="profile_save">Сохранить</string>
     <string name="profile_edit_icon_desc">Редактировать поле</string>
+    <string name="user_name_format">Пользователь %1$d</string>
+    <string name="like_button_description">Лайк</string>
+    <string name="notification_channel_name">Синхронизация</string>
+    <string name="notification_title">Синхронизация</string>
+    <string name="notification_text">Новые данные получены</string>
 </resources>

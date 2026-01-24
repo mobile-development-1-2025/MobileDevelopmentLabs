@@ -17,7 +17,8 @@ data class FeedUiState(
     val isLoading: Boolean = false,
     val messages: List<Message> = emptyList(),
     val isOffline: Boolean = false,
-    val errorMessage: String? = null
+    val errorMessage: String? = null,
+    val likedIds: Set<Int> = emptySet()
 )
 
 class NewsViewModel(application: Application) : AndroidViewModel(application) {
@@ -59,6 +60,18 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
                     errorMessage = errorText
                 )
             }
+        }
+    }
+
+    fun toggleLike(messageId: Int) {
+        _uiState.update { state ->
+            val newSet = state.likedIds.toMutableSet()
+            if (newSet.contains(messageId)) {
+                newSet.remove(messageId)
+            } else {
+                newSet.add(messageId)
+            }
+            state.copy(likedIds = newSet)
         }
     }
 }
