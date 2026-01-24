@@ -3,4 +3,6 @@
     <string name="name_value">Firsov Ilia</string>
     <string name="email_value">firs_iln@mail.com</string>
     <string name="about_value">Studying kotlin</string>
+    <string name="avatar">Аватар</string>
+    <string name="like">Лайк</string>
 </resources>

@@ -10,6 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lab1.App
 import com.example.lab1.databinding.FragmentFeedBinding
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 
 class FeedFragment : Fragment() {
 
@@ -20,6 +23,13 @@ class FeedFragment : Fragment() {
 
     private lateinit var viewModel: FeedViewModel
     private val adapter = MessagesAdapter()
+
+    private fun isOnline(context: Context): Boolean {
+        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val network = cm.activeNetwork ?: return false
+        val caps = cm.getNetworkCapabilities(network) ?: return false
+        return caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,12 +61,18 @@ class FeedFragment : Fragment() {
             Log.d(tag, "messages observed: ${items.size}")
             adapter.submitList(items)
         }
-
+        val online = isOnline(requireContext())
+        binding.tvOffline.visibility = if (online) View.GONE else View.VISIBLE
+        binding.btnRefresh.isEnabled = online
         binding.btnRefresh.setOnClickListener {
-            viewModel.refresh()
+            val nowOnline = isOnline(requireContext())
+            binding.tvOffline.visibility = if (nowOnline) View.GONE else View.VISIBLE
+            binding.btnRefresh.isEnabled = nowOnline
+            if (nowOnline) {
+                viewModel.refresh()
+            }
         }
 
-        // чтобы лента не была пустой с первого запуска
         viewModel.refresh()
     }
 

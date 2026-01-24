@@ -6,8 +6,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.lab1.databinding.ActivityMainBinding
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 
 class MainActivity : AppCompatActivity() {
+
+    private companion object {
+        const val REQ_CODE_NOTIF = 42
+    }
+
     private lateinit var binding: ActivityMainBinding
     private val TAG = "MainActivity"
 
@@ -22,6 +30,13 @@ class MainActivity : AppCompatActivity() {
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
         binding.bottomNavigation.setupWithNavController(navController)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), REQ_CODE_NOTIF)
+            }
+        }
+
 
         Log.d(TAG, "onCreate: MainActivity создана")
     }
