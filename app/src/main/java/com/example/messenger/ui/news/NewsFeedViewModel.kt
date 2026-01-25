@@ -7,11 +7,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.messenger.data.MessageRepository
 import com.example.messenger.data.local.MessageEntity
+import com.example.messenger.utils.NetworkMonitor
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class NewsFeedViewModel(
-    private val repository: MessageRepository
+    private val repository: MessageRepository,
+    private val networkMonitor: NetworkMonitor
 ) : ViewModel() {
 
     private val _messages = MutableLiveData<List<MessageEntity>>(emptyList())
@@ -22,6 +24,8 @@ class NewsFeedViewModel(
 
     private val _error = MutableLiveData<String?>(null)
     val error: LiveData<String?> = _error
+
+    val isOnline: LiveData<Boolean> = networkMonitor.isOnline
 
     init {
         observeMessages()
@@ -41,6 +45,10 @@ class NewsFeedViewModel(
 
     fun refresh() {
         viewModelScope.launch {
+            if (networkMonitor.isOnline.value == false) {
+                _error.value = "Нет подключения к интернету"
+                return@launch
+            }
             _isLoading.value = true
             _error.value = null
             try {
@@ -53,16 +61,28 @@ class NewsFeedViewModel(
         }
     }
 
+    fun toggleLike(messageId: Long, isLiked: Boolean) {
+        viewModelScope.launch {
+            repository.toggleLike(messageId, isLiked)
+        }
+    }
+
     class Factory(
-        private val repository: MessageRepository
+        private val repository: MessageRepository,
+        private val networkMonitor: NetworkMonitor
     ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(NewsFeedViewModel::class.java)) {
-                return NewsFeedViewModel(repository) as T
+                return NewsFeedViewModel(repository, networkMonitor) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class")
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        networkMonitor.unregister()
     }
 }
 

@@ -22,12 +22,18 @@ class MessageRepository(
     suspend fun refreshMessages() = withContext(ioDispatcher) {
         try {
             val remoteMessages = NetworkClient.messageApi.getMessages()
-            val entities = remoteMessages.map { it.toEntity() }
-            messageDao.clearAll()
+            val entities = remoteMessages.map { dto ->
+                val existing = messageDao.getMessageById(dto.id)
+                dto.toEntity().copy(isLiked = existing?.isLiked ?: false)
+            }
             messageDao.insertAll(entities)
         } catch (_: Exception) {
 
         }
+    }
+
+    suspend fun toggleLike(messageId: Long, isLiked: Boolean) = withContext(ioDispatcher) {
+        messageDao.updateLikeStatus(messageId, isLiked)
     }
 }
 

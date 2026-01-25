@@ -67,6 +67,9 @@ dependencies {
     implementation(libs.room.ktx)
     kapt(libs.room.compiler)
     
+    // WorkManager
+    implementation(libs.work.runtime.ktx)
+    
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

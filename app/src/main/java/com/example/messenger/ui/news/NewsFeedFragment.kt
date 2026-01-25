@@ -24,7 +24,8 @@ class NewsFeedFragment : Fragment() {
     private val viewModel: NewsFeedViewModel by viewModels {
         val db = AppDatabase.getInstance(requireContext())
         val repo = MessageRepository(db)
-        NewsFeedViewModel.Factory(repo)
+        val networkMonitor = com.example.messenger.utils.NetworkMonitor(requireContext())
+        NewsFeedViewModel.Factory(repo, networkMonitor)
     }
     
     override fun onCreateView(
@@ -38,16 +39,36 @@ class NewsFeedFragment : Fragment() {
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = MessageAdapter()
+        val adapter = MessageAdapter { messageId, isLiked ->
+            viewModel.toggleLike(messageId, isLiked)
+        }
         binding.recyclerMessages.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerMessages.adapter = adapter
 
-        binding.buttonRefresh.setOnClickListener {
+        binding.fabRefresh.setOnClickListener {
             viewModel.refresh()
         }
 
         viewModel.messages.observe(viewLifecycleOwner) { list ->
             adapter.submitList(list)
+        }
+        
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            binding.fabRefresh.isEnabled = !isLoading
+        }
+
+        viewModel.isOnline.observe(viewLifecycleOwner) { isOnline ->
+            if (!isOnline) {
+            } else {
+                if (adapter.itemCount == 0) {
+                    viewModel.refresh()
+                }
+            }
+        }
+
+        viewModel.error.observe(viewLifecycleOwner) { error ->
+            error?.let {
+            }
         }
         
         if (savedInstanceState == null) {

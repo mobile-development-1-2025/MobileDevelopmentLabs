@@ -1,11 +1,18 @@
 package com.example.messenger
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.messenger.databinding.ActivityMainBinding
+import com.example.messenger.utils.NotificationHelper
+import com.example.messenger.utils.WorkManagerHelper
 
 class MainActivity : AppCompatActivity() {
     
@@ -13,6 +20,15 @@ class MainActivity : AppCompatActivity() {
     
     companion object {
         private const val TAG = "MainActivity"
+    }
+
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        permissions.entries.forEach {
+            Log.d(TAG, "${it.key} = ${it.value}")
+        }
+        initializeBackgroundServices()
     }
     
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         
         setupNavigation()
+        requestPermissions()
     }
     
     private fun setupNavigation() {
@@ -31,6 +48,39 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
         
         binding.bottomNavigation.setupWithNavController(navController)
+    }
+
+    private fun requestPermissions() {
+        val permissionsToRequest = mutableListOf<String>()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                permissionsToRequest.add(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        }
+
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_CONTACTS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            permissionsToRequest.add(Manifest.permission.READ_CONTACTS)
+        }
+
+        if (permissionsToRequest.isNotEmpty()) {
+            requestPermissionLauncher.launch(permissionsToRequest.toTypedArray())
+        } else {
+            initializeBackgroundServices()
+        }
+    }
+
+    private fun initializeBackgroundServices() {
+        NotificationHelper.createNotificationChannel(this)
+        WorkManagerHelper.scheduleSync(this)
     }
     
     override fun onStart() {
