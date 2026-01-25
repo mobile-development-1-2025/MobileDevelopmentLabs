@@ -1,10 +1,11 @@
 package com.example.mobiledevslb1.viewmodels
 
+import android.app.Application
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.LiveData
 
-class SettingViewModel: ViewModelLogged() {
+class SettingViewModel(application: Application): ViewModelLogged(application) {
     private val _isDarkTheme = MutableLiveData(false)
     val isDarkTheme: LiveData<Boolean> = _isDarkTheme
     fun setIsDarkTheme(value: Boolean) {

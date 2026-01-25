@@ -2,11 +2,12 @@
 
 package com.example.mobiledevslb1.viewmodels
 
+import android.app.Application
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.LiveData
 
-class ProfileViewModel: ViewModelLogged() {
+class ProfileViewModel(application: Application): ViewModelLogged(application) {
     private val _name = MutableLiveData("Никнейм")
     val name: LiveData<String> = _name
     fun setName(value: String) {
