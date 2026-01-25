@@ -1,0 +1,4 @@
+ru.itmo.mobiledev.lab4.test.app-androidTest-0 /Users/timur/Documents/ITMO/MobileDev/lab4/app/build/generated/res/resValues/androidTest/debug
+ru.itmo.mobiledev.lab4.test.app-mergeDebugAndroidTestResources-1 /Users/timur/Documents/ITMO/MobileDev/lab4/app/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/merged.dir
+ru.itmo.mobiledev.lab4.test.app-mergeDebugAndroidTestResources-2 /Users/timur/Documents/ITMO/MobileDev/lab4/app/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/stripped.dir
+ru.itmo.mobiledev.lab4.test.app-merged_res-3 /Users/timur/Documents/ITMO/MobileDev/lab4/app/build/intermediates/merged_res/debugAndroidTest

@@ -1,0 +1,70 @@
+[
+    {
+        "merged": "ru.itmo.mobiledev.lab4.app-merged_res-56:/layout_fragment_news.xml.flat",
+        "source": "ru.itmo.mobiledev.lab4.app-main-58:/layout/fragment_news.xml"
+    },
+    {
+        "merged": "ru.itmo.mobiledev.lab4.app-merged_res-56:/navigation_nav_graph.xml.flat",
+        "source": "ru.itmo.mobiledev.lab4.app-main-58:/navigation/nav_graph.xml"
+    },
+    {
+        "merged": "ru.itmo.mobiledev.lab4.app-merged_res-56:/drawable_avatar_circle.xml.flat",
+        "source": "ru.itmo.mobiledev.lab4.app-main-58:/drawable/avatar_circle.xml"
+    },
+    {
+        "merged": "ru.itmo.mobiledev.lab4.app-merged_res-56:/drawable_ic_profile.xml.flat",
+        "source": "ru.itmo.mobiledev.lab4.app-main-58:/drawable/ic_profile.xml"
+    },
+    {
+        "merged": "ru.itmo.mobiledev.lab4.app-merged_res-56:/layout_item_message.xml.flat",
+        "source": "ru.itmo.mobiledev.lab4.app-main-58:/layout/item_message.xml"
+    },
+    {
+        "merged": "ru.itmo.mobiledev.lab4.app-merged_res-56:/menu_bottom_nav_menu.xml.flat",
+        "source": "ru.itmo.mobiledev.lab4.app-main-58:/menu/bottom_nav_menu.xml"
+    },
+    {
+        "merged": "ru.itmo.mobiledev.lab4.app-merged_res-56:/layout_fragment_settings.xml.flat",
+        "source": "ru.itmo.mobiledev.lab4.app-main-58:/layout/fragment_settings.xml"
+    },
+    {
+        "merged": "ru.itmo.mobiledev.lab4.app-merged_res-56:/drawable_ic_like_filled.xml.flat",
+        "source": "ru.itmo.mobiledev.lab4.app-main-58:/drawable/ic_like_filled.xml"
+    },
+    {
+        "merged": "ru.itmo.mobiledev.lab4.app-merged_res-56:/layout_fragment_profile.xml.flat",
+        "source": "ru.itmo.mobiledev.lab4.app-main-58:/layout/fragment_profile.xml"
+    },
+    {
+        "merged": "ru.itmo.mobiledev.lab4.app-merged_res-56:/drawable_ic_settings.xml.flat",
+        "source": "ru.itmo.mobiledev.lab4.app-main-58:/drawable/ic_settings.xml"
+    },
+    {
+        "merged": "ru.itmo.mobiledev.lab4.app-merged_res-56:/drawable_ic_refresh.xml.flat",
+        "source": "ru.itmo.mobiledev.lab4.app-main-58:/drawable/ic_refresh.xml"
+    },
+    {
+        "merged": "ru.itmo.mobiledev.lab4.app-merged_res-56:/drawable_ic_launcher.xml.flat",
+        "source": "ru.itmo.mobiledev.lab4.app-main-58:/drawable/ic_launcher.xml"
+    },
+    {
+        "merged": "ru.itmo.mobiledev.lab4.app-merged_res-56:/drawable_ic_launcher_round.xml.flat",
+        "source": "ru.itmo.mobiledev.lab4.app-main-58:/drawable/ic_launcher_round.xml"
+    },
+    {
+        "merged": "ru.itmo.mobiledev.lab4.app-merged_res-56:/color_bottom_nav_item.xml.flat",
+        "source": "ru.itmo.mobiledev.lab4.app-main-58:/color/bottom_nav_item.xml"
+    },
+    {
+        "merged": "ru.itmo.mobiledev.lab4.app-merged_res-56:/drawable_ic_like_outline.xml.flat",
+        "source": "ru.itmo.mobiledev.lab4.app-main-58:/drawable/ic_like_outline.xml"
+    },
+    {
+        "merged": "ru.itmo.mobiledev.lab4.app-merged_res-56:/layout_activity_main.xml.flat",
+        "source": "ru.itmo.mobiledev.lab4.app-main-58:/layout/activity_main.xml"
+    },
+    {
+        "merged": "ru.itmo.mobiledev.lab4.app-merged_res-56:/drawable_ic_news.xml.flat",
+        "source": "ru.itmo.mobiledev.lab4.app-main-58:/drawable/ic_news.xml"
+    }
+]
