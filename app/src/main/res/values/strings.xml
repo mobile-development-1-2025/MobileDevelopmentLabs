@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Messenger</string>
+    <string name="news_title">Новости</string>
+    <string name="profile_title">Профиль</string>
+    <string name="settings_title">Настройки</string>
+    <string name="news_content">Здесь будут отображаться новости</string>
+    <string name="profile_content">Информация о профиле пользователя</string>
+    <string name="settings_content">Настройки приложения</string>
+    <string name="theme_light">Светлая тема</string>
+    <string name="theme_dark">Тёмная тема</string>
+    <string name="theme_system">Системная тема</string>
+    <string name="notifications_enabled">Уведомления включены</string>
+    <string name="notifications_disabled">Уведомления отключены</string>
+    <string name="refresh">Обновить</string>
+    <string name="news_empty">Нет сообщений</string>
+</resources>
