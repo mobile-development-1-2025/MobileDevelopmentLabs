@@ -1,0 +1,7 @@
+com.example.lab1.test.app-tracing-1.2.0-0 C:\Users\archi\.gradle\caches\8.13\transforms\320341c8d80eb182cbee20e48577dffb\transformed\tracing-1.2.0\res
+com.example.lab1.test.app-core-1.7.0-1 C:\Users\archi\.gradle\caches\8.13\transforms\ce67d08602bc588db0f3b5145892771a\transformed\core-1.7.0\res
+com.example.lab1.test.app-androidTest-2 C:\Users\archi\OneDrive\Desktop\ITMO\MobRaz\MobileDevLabs\app\build\generated\res\resValues\androidTest\debug
+com.example.lab1.test.app-updated_navigation_xml-3 C:\Users\archi\OneDrive\Desktop\ITMO\MobRaz\MobileDevLabs\app\build\generated\updated_navigation_xml\debugAndroidTest
+com.example.lab1.test.app-mergeDebugAndroidTestResources-4 C:\Users\archi\OneDrive\Desktop\ITMO\MobRaz\MobileDevLabs\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.example.lab1.test.app-mergeDebugAndroidTestResources-5 C:\Users\archi\OneDrive\Desktop\ITMO\MobRaz\MobileDevLabs\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.example.lab1.test.app-debugAndroidTest-6 C:\Users\archi\OneDrive\Desktop\ITMO\MobRaz\MobileDevLabs\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources

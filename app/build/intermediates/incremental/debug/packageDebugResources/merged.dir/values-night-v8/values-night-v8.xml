@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="message_incoming_bg">#2B2B35</color>
+    <color name="message_outgoing_bg">#3D4B72</color>
+    <color name="white">#FFFFFFFF</color>
+    <style name="Base.Theme.Lab1" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        
+    </style>
+</resources>
