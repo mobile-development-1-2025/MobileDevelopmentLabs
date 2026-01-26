@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    android:label="@string/news"
+    app:startDestination="@id/newsFragment">
+
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="com.example.lab1.ui.NewsFragment"
+        android:label="@string/news" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.lab1.ui.ProfileFragment"
+        android:label="@string/profile" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.lab1.ui.SettingsFragment"
+        android:label="@string/settings" />
+</navigation>
