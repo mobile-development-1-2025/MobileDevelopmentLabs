@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">lab1</string>
+    <string name="app_name">lab</string>
     <string name="first_name">Имя:</string>
     <string name="last_name">Фамилия:</string>
     <string name="email">Email:</string>
@@ -13,4 +13,7 @@
     <string name="enter_name">Введите имя</string>
     <string name="enter_status">Введите статус</string>
     <string name="refresh">Обновить</string>
+    <string name="avatar">Аватар</string>
+    <string name="like">Лайк</string>
+    <string name="test">test</string>
 </resources>

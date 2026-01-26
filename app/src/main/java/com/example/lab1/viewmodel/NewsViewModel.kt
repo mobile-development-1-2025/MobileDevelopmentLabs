@@ -16,11 +16,15 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
     private val _loading = MutableLiveData(false)
     val loading: LiveData<Boolean> = _loading
 
-    fun refresh() {
+    private val _syncEvent = MutableLiveData<Boolean>()
+    val syncEvent: LiveData<Boolean> = _syncEvent
+
+    fun refreshFromNetwork() {
         viewModelScope.launch {
             _loading.value = true
-            val list = repo.fetchAndSave()
+            val (list, isNew) = repo.fetchAndSaveWithFlag()
             _messages.value = list
+            _syncEvent.value = isNew
             _loading.value = false
         }
     }
@@ -28,9 +32,15 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
     fun loadFromDb() {
         viewModelScope.launch {
             _loading.value = true
-            val list = repo.getFromDb()
-            _messages.value = list
+            _messages.value = repo.getFromDb()
             _loading.value = false
+        }
+    }
+
+    fun toggleLike(message: MessageEntity) {
+        viewModelScope.launch {
+            repo.toggleLike(message)
+            _messages.value = repo.getFromDb()
         }
     }
 }

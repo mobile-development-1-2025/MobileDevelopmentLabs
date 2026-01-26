@@ -88,4 +88,10 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
 
     implementation("androidx.recyclerview:recyclerview:1.4.0")
+
+    implementation("androidx.cardview:cardview:1.0.0")
+    implementation("androidx.work:work-runtime-ktx:2.9.0")
+    implementation("androidx.core:core-ktx:1.10.1")
+
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0")
 }

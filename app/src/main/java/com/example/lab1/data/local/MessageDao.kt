@@ -15,4 +15,10 @@ interface MessageDao {
 
     @Query("DELETE FROM messages")
     suspend fun clear()
+
+    @Query("SELECT * FROM messages WHERE id = :id LIMIT 1")
+    suspend fun getById(id: Int): MessageEntity?
+
+    @Query("UPDATE messages SET liked = :liked WHERE id = :id")
+    suspend fun updateLike(liked: Boolean, id: Int)
 }

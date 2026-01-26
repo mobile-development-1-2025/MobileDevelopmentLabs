@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.example.lab1.databinding.FragmentProfileBinding
-import com.example.lab1.viewmodel.ProfileSettingsViewModel
+import com.example.lab1.viewmodel.ProfileViewModel
 import kotlin.math.min
 
 class ProfileFragment : Fragment() {
@@ -18,7 +18,7 @@ class ProfileFragment : Fragment() {
     private val binding get() = _binding!!
     private val TAG = "ProfileFragment"
 
-    private val viewModel: ProfileSettingsViewModel by activityViewModels()
+    private val viewModel: ProfileViewModel by activityViewModels()
 
     private var nameWatcher: TextWatcher? = null
     private var statusWatcher: TextWatcher? = null

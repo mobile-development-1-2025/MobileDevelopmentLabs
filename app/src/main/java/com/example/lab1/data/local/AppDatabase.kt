@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 
 @Database(
     entities = [MessageEntity::class],
-    version = 4,
+    version = 5,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -19,10 +19,13 @@ abstract class AppDatabase : RoomDatabase() {
         fun getInstance(context: Context): AppDatabase =
             INSTANCE ?: synchronized(this) {
                 INSTANCE ?: Room.databaseBuilder(
-                                context.applicationContext,
-                                AppDatabase::class.java,
-                                "app_db"
-                            ).fallbackToDestructiveMigration(false).build().also { INSTANCE = it }
+                    context.applicationContext,
+                    AppDatabase::class.java,
+                    "app_db"
+                )
+                    .fallbackToDestructiveMigration(false)
+                    .build().also { INSTANCE = it }
             }
     }
 }
+
