@@ -21,7 +21,7 @@ class FeedFragment : Fragment() {
     private val tagLog = "FeedFragment"
 
     private lateinit var viewModel: FeedViewModel
-    private val adapter = MessagesAdapter()
+    private lateinit var adapter: MessagesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +31,7 @@ class FeedFragment : Fragment() {
 
         val factory = FeedViewModelFactory(app.messageRepository)
         viewModel = ViewModelProvider(this, factory)[FeedViewModel::class.java]
+        adapter = MessagesAdapter { item -> viewModel.toggleLike(item.id) }
     }
 
     override fun onCreateView(
@@ -53,6 +54,10 @@ class FeedFragment : Fragment() {
         viewModel.messages.observe(viewLifecycleOwner) { items ->
             Log.d(tagLog, "messages observed: ${items.size}")
             adapter.submitList(items)
+        }
+
+        viewModel.likedIds.observe(viewLifecycleOwner) { ids ->
+            adapter.updateLikedIds(ids)
         }
 
         val online = isOnline(requireContext())

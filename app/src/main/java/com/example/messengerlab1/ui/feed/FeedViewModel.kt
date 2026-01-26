@@ -20,8 +20,17 @@ class FeedViewModel(
     init {
         Log.d(tag, "init: created")
     }
+
+    private val _likedIds = MutableLiveData<Set<Int>>(emptySet())
+    val likedIds: LiveData<Set<Int>> = _likedIds
+
     private val _syncSuccess = MutableLiveData<Unit>()
     val syncSuccess: LiveData<Unit> = _syncSuccess
+
+    fun toggleLike(id: Int) {
+        val current = _likedIds.value.orEmpty()
+        _likedIds.value = if (current.contains(id)) current - id else current + id
+    }
 
     fun refresh() {
         Log.d(tag, "refresh: clicked")

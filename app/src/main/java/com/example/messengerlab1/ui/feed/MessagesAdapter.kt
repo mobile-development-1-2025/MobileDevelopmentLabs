@@ -5,11 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.messengerlab1.data.db.MessageEntity
 import com.example.messengerlab1.databinding.ItemMessageBinding
 import com.example.messengerlab1.R
+import com.example.messengerlab1.data.db.MessageEntity
 
-class MessagesAdapter : ListAdapter<MessageEntity, MessagesAdapter.VH>(Diff) {
+class MessagesAdapter(
+    private val onLikeClick: (MessageEntity) -> Unit
+) : ListAdapter<MessageEntity, MessagesAdapter.VH>(Diff) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         val binding = ItemMessageBinding.inflate(
@@ -20,7 +22,13 @@ class MessagesAdapter : ListAdapter<MessageEntity, MessagesAdapter.VH>(Diff) {
         return VH(binding)
     }
 
-    private val likedIds = mutableSetOf<Int>()
+    private var likedIds: Set<Int> = emptySet()
+
+    fun updateLikedIds(ids: Set<Int>) {
+        if (likedIds == ids) return
+        likedIds = ids
+        notifyDataSetChanged()
+    }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         holder.bind(getItem(position))
@@ -32,19 +40,12 @@ class MessagesAdapter : ListAdapter<MessageEntity, MessagesAdapter.VH>(Diff) {
             binding.tvTitle.text = item.title
             binding.tvBody.text = item.body
 
-            fun renderLike() {
-                val liked = likedIds.contains(item.id)
-                binding.ivLike.setImageResource(
-                    if (liked) R.drawable.ic_like_filled else R.drawable.ic_like_border
-                )
-            }
+            val liked = likedIds.contains(item.id)
+            binding.ivLike.setImageResource(
+                if (liked) R.drawable.ic_like_filled else R.drawable.ic_like_border
+            )
 
-            renderLike()
-
-            binding.ivLike.setOnClickListener {
-                if (likedIds.contains(item.id)) likedIds.remove(item.id) else likedIds.add(item.id)
-                renderLike()
-            }
+            binding.ivLike.setOnClickListener { onLikeClick(item) }
         }
     }
 
