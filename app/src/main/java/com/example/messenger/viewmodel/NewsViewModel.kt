@@ -9,7 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.messenger.data.dto.NewsData
 import com.example.messenger.db.MessengerDatabase
 import com.example.messenger.repository.NewsRepository
-import com.example.messenger.httpClient.Client
+import com.example.messenger.httpClients.NewsClient
 import kotlinx.coroutines.launch
 
 
@@ -27,7 +27,7 @@ class NewsViewModel(application: Application): AndroidViewModel(application) {
     init {
         Log.d(tag, "Init News ViewModel")
         val db = MessengerDatabase.getInstance(application)
-        repository = NewsRepository(Client.api, db.NewsDao())
+        repository = NewsRepository(NewsClient.api, db.NewsDao())
         loadNews()
     }
 

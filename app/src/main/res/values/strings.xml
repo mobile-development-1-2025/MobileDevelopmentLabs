@@ -3,6 +3,7 @@
     <string name="nav_news">Новости</string>
     <string name="nav_profile">Профиль</string>
     <string name="nav_settings">Настройки</string>
+    <string name="nav_messages">Сообщения</string>
 
     <string name="news_title">Тут должны быть новости)</string>
 
@@ -26,4 +27,8 @@
     <string name="input_email">Введите email</string>
     <string name="email">Email:</string>
     <string name="name">Имя:</string>
+    <string name="msg_username">Username</string>
+    <string name="msg_text">Message Text</string>
+    <string name="add_message">Добавить сообщение</string>
+    <string name="messages_title">Сообщения</string>
 </resources>

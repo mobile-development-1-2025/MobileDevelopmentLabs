@@ -5,7 +5,7 @@ import com.example.messenger.data.dao.NewsDao
 import com.example.messenger.data.dto.NewsData
 import com.example.messenger.data.mappers.toDto
 import com.example.messenger.data.mappers.toEntity
-import com.example.messenger.httpClient.NewsApi
+import com.example.messenger.httpClients.NewsApi
 
 
 class NewsRepository(private val api: NewsApi, private val dao: NewsDao) {

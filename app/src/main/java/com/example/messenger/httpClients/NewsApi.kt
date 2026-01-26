@@ -1,7 +1,7 @@
-package com.example.messenger.httpClient
+package com.example.messenger.httpClients
 
 import retrofit2.http.GET
-import retrofit2.http.Query;
+import retrofit2.http.Query
 import com.example.messenger.data.dto.NewsResponse
 
 const val API_KEY = "54a112608a5e4fa3a228c6f52dbb7904"

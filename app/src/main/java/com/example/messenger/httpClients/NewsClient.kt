@@ -1,9 +1,9 @@
-package com.example.messenger.httpClient
+package com.example.messenger.httpClients
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object Client {
+object NewsClient {
     val api: NewsApi = Retrofit.Builder()
         .baseUrl("https://newsapi.org/")
         .addConverterFactory(GsonConverterFactory.create())

@@ -12,6 +12,10 @@
         tools:layout="@layout/fragment_news">
 
         <action
+            android:id="@+id/action_home_to_messages"
+            app:destination="@id/messengerFragment" />
+
+        <action
             android:id="@+id/action_home_to_details"
             app:destination="@id/settingsFragment" />
 
@@ -19,6 +23,13 @@
             android:id="@+id/action_home_to_profile"
             app:destination="@id/profileFragment" />
 
+    </fragment>
+
+    <fragment
+        android:id="@+id/messengerFragment"
+        android:name="com.example.messenger.ui.MessengerFragment"
+        android:label="Messages"
+        tools:layout="@layout/fragment_messenger">
     </fragment>
 
     <fragment

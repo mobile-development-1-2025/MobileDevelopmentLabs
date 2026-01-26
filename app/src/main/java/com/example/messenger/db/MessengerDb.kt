@@ -4,12 +4,15 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.messenger.data.dao.MessagesDao
 import com.example.messenger.data.dao.NewsDao
+import com.example.messenger.data.entities.MessagesEntity
 import com.example.messenger.data.entities.NewsEntity
 
-@Database(entities = [NewsEntity::class], version = 2)
+@Database(entities = [NewsEntity::class, MessagesEntity::class], version = 3)
 abstract class MessengerDatabase: RoomDatabase() {
     abstract fun NewsDao(): NewsDao
+    abstract fun MessagesDao(): MessagesDao
 
     companion object {
         private var INSTANCE: MessengerDatabase? = null
@@ -21,7 +24,7 @@ abstract class MessengerDatabase: RoomDatabase() {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         MessengerDatabase::class.java,
-                        "news_db"
+                        "messenger_db"
 
                     ).fallbackToDestructiveMigration().build()
                     INSTANCE = instance

@@ -1,8 +1,13 @@
 package com.example.messenger
 
+import android.Manifest
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -15,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var themeManager: ThemeManager
     private lateinit var viewModel: SettingsViewModel
-    private var tag: String = "Main"
+    private var tag: String = "Main Activity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setupNavigation()
         updateBottomNavigationBackground()
+        requestNotificationPermissionIfNeeded()
     }
 
     private fun updateBottomNavigationBackground() {
@@ -48,7 +54,24 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
-    fun onThemeChanged() {
-        updateBottomNavigationBackground()
+    private fun requestNotificationPermissionIfNeeded() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val granted = ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.POST_NOTIFICATIONS
+            ) == PackageManager.PERMISSION_GRANTED
+
+            if (!granted) {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                    101
+                )
+            }
+        }
     }
+
+//    fun onThemeChanged() {
+//        updateBottomNavigationBackground()
+//    }
 }

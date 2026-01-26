@@ -69,7 +69,7 @@ class SettingsFragment: Fragment() {
 
         binding.saveSettingsButton.setOnClickListener {
             viewModel.applyTheme()
-            (activity as? MainActivity)?.onThemeChanged()
+//            (activity as? MainActivity)?.onThemeChanged()
         }
     }
 

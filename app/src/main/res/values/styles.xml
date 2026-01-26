@@ -18,7 +18,6 @@
     </style>
 
     <style name="MenuTextAppearance.Inactive">
-        <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/bottom_nav_item_unselected</item>
         <item name="android:fontFamily">sans-serif</item>
     </style>
