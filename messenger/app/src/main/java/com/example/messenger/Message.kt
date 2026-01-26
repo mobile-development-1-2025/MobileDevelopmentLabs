@@ -9,5 +9,6 @@ data class Message(
     val id: Long = 0,
     val title: String,
     val body: String?,
-    val userId: Int
+    val userId: Int,
+    var isLiked: Boolean = false
 )

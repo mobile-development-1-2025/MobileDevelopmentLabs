@@ -3,22 +3,43 @@ package com.example.messenger
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import de.hdodenhof.circleimageview.CircleImageView
 
 class MessageAdapter : RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
 
-    private var messages: List<Message> = emptyList()
+    private var messages: MutableList<Message> = mutableListOf()
 
     inner class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val titleTextView: TextView = itemView.findViewById(R.id.tvTitle)
-        private val bodyTextView: TextView = itemView.findViewById(R.id.tvBody)
-        private val userIdTextView: TextView = itemView.findViewById(R.id.tvUserId)
+        private val ivAvatar: CircleImageView = itemView.findViewById(R.id.ivAvatar)
+        private val tvName: TextView = itemView.findViewById(R.id.tvName)
+        private val tvTitle: TextView = itemView.findViewById(R.id.tvTitle)
+        private val tvBody: TextView = itemView.findViewById(R.id.tvBody)
+        private val tvUserId: TextView = itemView.findViewById(R.id.tvUserId)
+        private val ibLike: ImageButton = itemView.findViewById(R.id.ibLike)
 
         fun bind(message: Message) {
-            titleTextView.text = message.title
-            bodyTextView.text = message.body ?: "Нет текста"
-            userIdTextView.text = "User ID: ${message.userId}"
+            ivAvatar.setImageResource(R.drawable.ic_user_avatar)
+
+            tvName.text = "User ${message.userId}"
+
+            tvTitle.text = message.title
+            tvBody.text = message.body ?: "Нет текста"
+            tvUserId.text = "User ID: ${message.userId}"
+
+            applyLikeIcon(message.isLiked)
+
+            ibLike.setOnClickListener {
+                message.isLiked = !message.isLiked
+                applyLikeIcon(message.isLiked)
+            }
+        }
+
+        private fun applyLikeIcon(isLiked: Boolean) {
+            val iconRes = if (isLiked) R.drawable.ic_heart_filled else R.drawable.ic_heart_empty
+            ibLike.setImageResource(iconRes)
         }
     }
 
@@ -35,7 +56,7 @@ class MessageAdapter : RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() 
     override fun getItemCount(): Int = messages.size
 
     fun updateMessages(newMessages: List<Message>) {
-        messages = newMessages
+        messages = newMessages.toMutableList()
         notifyDataSetChanged()
     }
 }

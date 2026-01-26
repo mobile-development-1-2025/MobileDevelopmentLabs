@@ -4,24 +4,23 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) {
 
     private val TAG = "LifeCycleLog"
-
-    // Получаем общий AppViewModel, который уже используется в других фрагментах
     private val viewModel: AppViewModel by activityViewModels()
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: MessageAdapter
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
-    private lateinit var btnRefresh: Button
+    private lateinit var fabRefresh: FloatingActionButton
     private lateinit var tvPlaceholder: TextView
 
     override fun onAttach(context: Context) {
@@ -40,29 +39,36 @@ class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) {
 
         recyclerView = view.findViewById(R.id.rv_messages)
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout)
-        btnRefresh = view.findViewById(R.id.btn_refresh)
+        fabRefresh = view.findViewById(R.id.fab_refresh)
         tvPlaceholder = view.findViewById(R.id.tv_feed_placeholder)
 
         adapter = MessageAdapter()
         recyclerView.adapter = adapter
 
-        // Подписываемся на список сообщений
         viewModel.messages.observe(viewLifecycleOwner) { messages ->
             adapter.updateMessages(messages)
             tvPlaceholder.visibility = if (messages.isEmpty()) View.VISIBLE else View.GONE
             swipeRefreshLayout.isRefreshing = false
         }
 
-        // Pull-to-refresh
         swipeRefreshLayout.setOnRefreshListener {
-            viewModel.refreshMessages()
+            tryRefresh(showSpinner = false)
         }
 
-        // Кнопка "Обновить"
-        btnRefresh.setOnClickListener {
-            swipeRefreshLayout.isRefreshing = true
-            viewModel.refreshMessages()
+        fabRefresh.setOnClickListener {
+            tryRefresh(showSpinner = true)
         }
+    }
+
+    private fun tryRefresh(showSpinner: Boolean) {
+        if (!NetworkUtils.isNetworkAvailable(requireContext())) {
+            swipeRefreshLayout.isRefreshing = false
+            Toast.makeText(requireContext(), "Нет сети", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (showSpinner) swipeRefreshLayout.isRefreshing = true
+        viewModel.refreshMessages()
     }
 
     override fun onStart() {
