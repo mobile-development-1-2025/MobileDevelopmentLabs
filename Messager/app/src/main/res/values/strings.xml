@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Мессенджер</string>
+    <string name="title_home">Главная</string>
+    <string name="title_profile">Профиль</string>
+    <string name="title_settings">Настройки</string>
+    <string name="title_messager">Мессенджер</string>
+    <string name="title_users">Пользователи</string>
+    <string name="edit_profile">Редактировать профиль</string>
+    <string name="logout">Выйти из аккаунта</string>
+    <string name="notifications">Уведомления</string>
+    <string name="change_password">Сменить пароль</string>
+    <string name="phone">Телефон</string>
+    <string name="politics">Политика конфиденциальности</string>
+    <string name="about">О приложении</string>
+</resources>
