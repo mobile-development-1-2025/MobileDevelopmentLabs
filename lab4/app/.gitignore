@@ -1,0 +1,27 @@
+# Gradle
+.gradle/
+build/
+
+# Android Studio
+/.idea
+*.iml
+
+# Local config and Keystore
+*.jks
+key.properties
+local.properties
+
+# Generated files
+/.gradle
+/captures
+.externalNativeBuild
+
+# APKs
+*.apk
+
+# Mac / Windows
+.DS_Store
+Thumbs.db
+
+# Do not upload env
+.env
