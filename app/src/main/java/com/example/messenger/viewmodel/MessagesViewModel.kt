@@ -49,33 +49,6 @@ class MessagesViewModel(application: Application): AndroidViewModel(application)
         }
     }
 
-//    private fun addToMessagesList(msg: MessageData) {
-//        val currentList = _messages.value.orEmpty()
-//        _messages.value = currentList + msg
-//    }
-
-//    fun loadMessages() {
-//        Log.d(tag, "Start messages loading...")
-//
-//        viewModelScope.launch {
-//            val messagesFromDb = repository.loadMessagesFromDb()
-//            _messages.value = messagesFromDb
-//        }
-//    }
-//
-//    fun loadNewMessage() {
-//        Log.d(tag, "New message is loading...")
-//
-//        viewModelScope.launch {
-//            try {
-//                val newMessage = repository.loadMessageFromNetwork()
-//                addToMessagesList(newMessage)
-//            } catch (e: Exception) {
-//                Log.e(tag, "Failed to load new message from network due to error: ", e)
-//            }
-//        }
-//    }
-
     override fun onCleared() {
         Log.d(tag, "onCleared: MessagesViewModel has been cleared")
         super.onCleared()

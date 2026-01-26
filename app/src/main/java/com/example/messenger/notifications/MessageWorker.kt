@@ -35,6 +35,12 @@ class MessageWorker(
         }
     }
 
+    private fun createNotifier(): Notifier {
+        return Notifier(applicationContext).apply {
+            setupNotificationChannel()
+        }
+    }
+
     private fun createRepository(): MessagesRepository {
         val db = MessengerDatabase.getInstance(applicationContext)
         return MessagesRepository(
@@ -42,11 +48,5 @@ class MessageWorker(
             db.MessagesDao(),
             applicationContext
         )
-    }
-
-    private fun createNotifier(): Notifier {
-        return Notifier(applicationContext).apply {
-            setupNotificationChannel()
-        }
     }
 }

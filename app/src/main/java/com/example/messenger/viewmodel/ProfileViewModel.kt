@@ -61,7 +61,6 @@ class ProfileViewModel(context: Context): ViewModel() {
         }
     }
 
-
     fun updateUserName(name: String) {
         val current = _profile.value ?: UserData()
         saveProfile(current.copy(name = name))

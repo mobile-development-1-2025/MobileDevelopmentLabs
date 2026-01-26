@@ -10,5 +10,5 @@ interface MessagesApi {
     suspend fun getMessage(@Path("id") id: Int): MessageResponseData
 
     @GET("users/{id}")
-    suspend fun getSender (@Path("id") id: Int): SenderData
+    suspend fun getSender(@Path("id") id: Int): SenderData
 }
