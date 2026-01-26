@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/newsFeedFragment"
+
+        android:icon="@drawable/nav_feed_selector"
+        android:title="Новости" />
+
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/nav_profile_selector"
+        android:title="Профиль" />
+
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/nav_settings_selector"
+        android:title="Настройки" />
+
+</menu>

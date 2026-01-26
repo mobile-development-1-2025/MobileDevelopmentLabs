@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="nav_margin_horizontal">50dp</dimen>
+    <dimen name="nav_margin_bottom">17dp</dimen>
+
+    <dimen name="nav_item_padding_horizontal">30dp</dimen>
+
+    <dimen name="nav_padding_vertical">11dp</dimen>
+
+    <dimen name="nav_height">70dp</dimen>
+</resources>
