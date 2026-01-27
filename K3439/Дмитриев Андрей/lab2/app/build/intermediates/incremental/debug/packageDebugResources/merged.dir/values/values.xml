@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="ic_launcher_background">#FFFFFF</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="white">#FFFFFFFF</color>
+    <string name="about_me">О себе</string>
+    <string name="app_info">Мессенджер v1.0\nЛабораторная работа №2 - MVVM</string>
+    <string name="app_name">Мессенджер</string>
+    <string name="dark_theme">Темная тема</string>
+    <string name="dark_theme_description">Включить темное оформление приложения</string>
+    <string name="data_saved_info">Данные автоматически сохраняются при повороте экрана благодаря ViewModel</string>
+    <string name="email_icon">Иконка email</string>
+    <string name="info_icon">Иконка информации</string>
+    <string name="news_feed">Лента новостей</string>
+    <string name="news_icon">Иконка новостей</string>
+    <string name="news_placeholder">Здесь будет отображаться лента новостей.\nФункционал в разработке.</string>
+    <string name="phone_icon">Иконка телефона</string>
+    <string name="profile_avatar">Аватар профиля</string>
+    <string name="profile_info">Информация о профиле</string>
+    <string name="settings">Настройки</string>
+    <string name="theme_icon">Иконка темы</string>
+    <string name="title_news">Новости</string>
+    <string name="title_profile">Профиль</string>
+    <string name="title_settings">Настройки</string>
+    <string name="user_name_hint">Введите ваше имя</string>
+    <string name="user_name_label">Имя пользователя</string>
+    <string name="user_status_hint">Введите ваш статус</string>
+    <string name="user_status_label">Статус</string>
+    <string name="viewmodel_info">Состояние темы хранится во ViewModel и сохраняется при повороте экрана</string>
+    <style name="Base.Theme.Messenger" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <item name="android:statusBarColor">@color/purple_700</item>
+    </style>
+    <style name="Theme.Messenger" parent="Base.Theme.Messenger"/>
+</resources>

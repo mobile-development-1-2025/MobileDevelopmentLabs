@@ -1,0 +1,14 @@
+/Users/noplana/Desktop/ /Mobile/4rd/моб_разр/lab3/app/src/main/java/com/example/messenger/fragments/ProfileFragment.kt
+/Users/noplana/Desktop/ /Mobile/4rd/моб_разр/lab3/app/src/main/java/com/example/messenger/viewmodel/SettingsViewModel.kt
+/Users/noplana/Desktop/ /Mobile/4rd/моб_разр/lab3/app/src/main/java/com/example/messenger/repository/MessageRepository.kt
+/Users/noplana/Desktop/ /Mobile/4rd/моб_разр/lab3/app/src/main/java/com/example/messenger/api/MessageApiService.kt
+/Users/noplana/Desktop/ /Mobile/4rd/моб_разр/lab3/app/src/main/java/com/example/messenger/fragments/NewsFeedFragment.kt
+/Users/noplana/Desktop/ /Mobile/4rd/моб_разр/lab3/app/src/main/java/com/example/messenger/api/RetrofitClient.kt
+/Users/noplana/Desktop/ /Mobile/4rd/моб_разр/lab3/app/src/main/java/com/example/messenger/viewmodel/ProfileViewModel.kt
+/Users/noplana/Desktop/ /Mobile/4rd/моб_разр/lab3/app/src/main/java/com/example/messenger/data/MessageDao.kt
+/Users/noplana/Desktop/ /Mobile/4rd/моб_разр/lab3/app/src/main/java/com/example/messenger/adapter/MessageAdapter.kt
+/Users/noplana/Desktop/ /Mobile/4rd/моб_разр/lab3/app/src/main/java/com/example/messenger/data/Message.kt
+/Users/noplana/Desktop/ /Mobile/4rd/моб_разр/lab3/app/src/main/java/com/example/messenger/viewmodel/MessageViewModel.kt
+/Users/noplana/Desktop/ /Mobile/4rd/моб_разр/lab3/app/src/main/java/com/example/messenger/data/AppDatabase.kt
+/Users/noplana/Desktop/ /Mobile/4rd/моб_разр/lab3/app/src/main/java/com/example/messenger/MainActivity.kt
+/Users/noplana/Desktop/ /Mobile/4rd/моб_разр/lab3/app/src/main/java/com/example/messenger/fragments/SettingsFragment.kt
