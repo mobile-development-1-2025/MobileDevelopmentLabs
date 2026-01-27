@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data-extraction-rules>
+    <!--
+    See https://developer.android.com/about/versions/12/backup-restore for more
+    information on how to configure your application for data extraction.
+    -->
+    <cloud-backup>
+        <include domain="sharedpref" path="."/>
+        <exclude domain="sharedpref" path="device.xml"/>
+    </cloud-backup>
+</data-extraction-rules>
