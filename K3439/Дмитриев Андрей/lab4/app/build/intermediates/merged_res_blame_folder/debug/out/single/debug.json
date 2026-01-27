@@ -1,0 +1,94 @@
+[
+    {
+        "merged": "com.example.messenger.app-merged_res-57:/navigation_nav_graph.xml.flat",
+        "source": "com.example.messenger.app-main-59:/navigation/nav_graph.xml"
+    },
+    {
+        "merged": "com.example.messenger.app-merged_res-57:/layout_fragment_profile.xml.flat",
+        "source": "com.example.messenger.app-main-59:/layout/fragment_profile.xml"
+    },
+    {
+        "merged": "com.example.messenger.app-merged_res-57:/drawable_ic_info.xml.flat",
+        "source": "com.example.messenger.app-main-59:/drawable/ic_info.xml"
+    },
+    {
+        "merged": "com.example.messenger.app-merged_res-57:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.example.messenger.app-main-59:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.messenger.app-merged_res-57:/drawable_ic_favorite_filled.xml.flat",
+        "source": "com.example.messenger.app-main-59:/drawable/ic_favorite_filled.xml"
+    },
+    {
+        "merged": "com.example.messenger.app-merged_res-57:/drawable_ic_favorite_border.xml.flat",
+        "source": "com.example.messenger.app-main-59:/drawable/ic_favorite_border.xml"
+    },
+    {
+        "merged": "com.example.messenger.app-merged_res-57:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.example.messenger.app-main-59:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.example.messenger.app-merged_res-57:/drawable_ic_settings.xml.flat",
+        "source": "com.example.messenger.app-main-59:/drawable/ic_settings.xml"
+    },
+    {
+        "merged": "com.example.messenger.app-merged_res-57:/layout_fragment_settings.xml.flat",
+        "source": "com.example.messenger.app-main-59:/layout/fragment_settings.xml"
+    },
+    {
+        "merged": "com.example.messenger.app-merged_res-57:/drawable_ic_refresh.xml.flat",
+        "source": "com.example.messenger.app-main-59:/drawable/ic_refresh.xml"
+    },
+    {
+        "merged": "com.example.messenger.app-merged_res-57:/menu_bottom_nav_menu.xml.flat",
+        "source": "com.example.messenger.app-main-59:/menu/bottom_nav_menu.xml"
+    },
+    {
+        "merged": "com.example.messenger.app-merged_res-57:/drawable_ic_theme.xml.flat",
+        "source": "com.example.messenger.app-main-59:/drawable/ic_theme.xml"
+    },
+    {
+        "merged": "com.example.messenger.app-merged_res-57:/layout_item_message.xml.flat",
+        "source": "com.example.messenger.app-main-59:/layout/item_message.xml"
+    },
+    {
+        "merged": "com.example.messenger.app-merged_res-57:/drawable_ic_news.xml.flat",
+        "source": "com.example.messenger.app-main-59:/drawable/ic_news.xml"
+    },
+    {
+        "merged": "com.example.messenger.app-merged_res-57:/drawable_ic_wifi.xml.flat",
+        "source": "com.example.messenger.app-main-59:/drawable/ic_wifi.xml"
+    },
+    {
+        "merged": "com.example.messenger.app-merged_res-57:/drawable_ic_sync.xml.flat",
+        "source": "com.example.messenger.app-main-59:/drawable/ic_sync.xml"
+    },
+    {
+        "merged": "com.example.messenger.app-merged_res-57:/drawable_circle_background.xml.flat",
+        "source": "com.example.messenger.app-main-59:/drawable/circle_background.xml"
+    },
+    {
+        "merged": "com.example.messenger.app-merged_res-57:/xml_backup_rules.xml.flat",
+        "source": "com.example.messenger.app-main-59:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.example.messenger.app-merged_res-57:/drawable_ic_profile.xml.flat",
+        "source": "com.example.messenger.app-main-59:/drawable/ic_profile.xml"
+    },
+    {
+        "merged": "com.example.messenger.app-merged_res-57:/xml_data_extraction_rules.xml.flat",
+        "source": "com.example.messenger.app-main-59:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.example.messenger.app-merged_res-57:/layout_fragment_news_feed.xml.flat",
+        "source": "com.example.messenger.app-main-59:/layout/fragment_news_feed.xml"
+    },
+    {
+        "merged": "com.example.messenger.app-merged_res-57:/layout_activity_main.xml.flat",
+        "source": "com.example.messenger.app-main-59:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.messenger.app-merged_res-57:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.example.messenger.app-main-59:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    }
+]

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Мессенджер</string>
+    
+    <!-- Bottom Navigation -->
+    <string name="title_news">Новости</string>
+    <string name="title_profile">Профиль</string>
+    <string name="title_settings">Настройки</string>
+    
+    <!-- News Feed Fragment -->
+    <string name="news_feed">Лента сообщений</string>
+    <string name="no_messages">Нет сообщений</string>
+    <string name="error_loading">Ошибка загрузки данных</string>
+    <string name="refresh">Обновить</string>
+    <string name="like">Нравится</string>
+    <string name="online">Онлайн</string>
+    <string name="offline">Офлайн</string>
+    <string name="user_avatar">Аватар пользователя</string>
+    
+    <!-- Profile Fragment -->
+    <string name="profile_avatar">Аватар профиля</string>
+    <string name="profile_info">Информация о профиле</string>
+    <string name="user_name_label">Имя пользователя</string>
+    <string name="user_name_hint">Введите ваше имя</string>
+    <string name="user_status_label">Статус</string>
+    <string name="user_status_hint">Введите ваш статус</string>
+    <string name="data_saved_info">Данные автоматически сохраняются при повороте экрана благодаря ViewModel</string>
+    
+    <!-- Settings Fragment -->
+    <string name="settings">Настройки</string>
+    <string name="dark_theme">Темная тема</string>
+    <string name="dark_theme_description">Включить темное оформление приложения</string>
+    <string name="theme_icon">Иконка темы</string>
+    <string name="info_icon">Иконка информации</string>
+    <string name="viewmodel_info">Состояние темы хранится во ViewModel и сохраняется при повороте экрана</string>
+    <string name="app_info">Мессенджер v1.0\nЛабораторная работа №4</string>
+    
+    <!-- Notifications -->
+    <string name="sync_complete">Синхронизация завершена</string>
+    <string name="new_data_received">Новые данные получены</string>
+    
+    <!-- Permissions -->
+    <string name="permission_notifications_rationale">Разрешение на уведомления нужно для получения информации о синхронизации данных</string>
+    <string name="permission_contacts_rationale">Разрешение на контакты позволит отображать имена отправителей</string>
+</resources>
