@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Мессенджер</string>
+    
+    <!-- Bottom Navigation -->
+    <string name="title_news">Новости</string>
+    <string name="title_profile">Профиль</string>
+    <string name="title_settings">Настройки</string>
+    
+    <!-- News Feed Fragment -->
+    <string name="news_feed">Лента новостей</string>
+    <string name="news_placeholder">Здесь будет отображаться лента новостей.\nФункционал в разработке.</string>
+    <string name="news_icon">Иконка новостей</string>
+    
+    <!-- Profile Fragment -->
+    <string name="profile_avatar">Аватар профиля</string>
+    <string name="profile_info">Информация о профиле</string>
+    <string name="email_icon">Иконка email</string>
+    <string name="phone_icon">Иконка телефона</string>
+    <string name="about_me">О себе</string>
+    
+    <!-- Settings Fragment -->
+    <string name="settings">Настройки</string>
+    <string name="dark_theme">Темная тема</string>
+    <string name="dark_theme_description">Включить темное оформление приложения</string>
+    <string name="theme_icon">Иконка темы</string>
+    <string name="app_info">Мессенджер v1.0\nЛабораторная работа по мобильной разработке</string>
+</resources>
