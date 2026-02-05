@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MessengerLab1</string>
+    <string name="avatar">Аватар</string>
+    <string name="like">Лайк</string>
+</resources>
