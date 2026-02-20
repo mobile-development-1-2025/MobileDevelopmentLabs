@@ -37,4 +37,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/themeLabel" />
 
+    <TextView
+        android:id="@+id/offlineLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/offline_mode"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/themeSwitch" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/offlineSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:checked="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/offlineLabel" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/openPermissionSettingsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/open_permission_settings"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/offlineSwitch" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

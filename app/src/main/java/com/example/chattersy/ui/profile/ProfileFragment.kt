@@ -8,9 +8,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.chattersy.R
+import com.example.chattersy.notifications.ContactsHelper
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ProfileFragment : Fragment()
 {
@@ -22,6 +28,7 @@ class ProfileFragment : Fragment()
     private lateinit var viewModel: ProfileViewModel
     private lateinit var userNameEditText: EditText
     private lateinit var userStatusEditText: EditText
+    private lateinit var contactsCountText: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,6 +49,7 @@ class ProfileFragment : Fragment()
 
         userNameEditText = view.findViewById(R.id.userName)
         userStatusEditText = view.findViewById(R.id.userStatus)
+        contactsCountText = view.findViewById(R.id.contactsCountText)
 
         viewModel.userName.observe(viewLifecycleOwner) { name ->
             if (userNameEditText.text.toString() != name)
@@ -80,6 +88,26 @@ class ProfileFragment : Fragment()
                 s?.toString()?.let { viewModel.updateUserStatus(it) }
             }
         })
+
+        loadContactsCount()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadContactsCount()
+    }
+
+    private fun loadContactsCount() {
+        if (!::contactsCountText.isInitialized) return
+        lifecycleScope.launch {
+            val count = withContext(Dispatchers.IO) {
+                ContactsHelper.getContactCount(requireContext())
+            }
+            contactsCountText.text = when (count) {
+                null -> getString(R.string.contacts_count_no_access)
+                else -> getString(R.string.contacts_count_label, count)
+            }
+        }
     }
 
     override fun onDestroyView()
