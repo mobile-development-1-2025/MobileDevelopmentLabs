@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">chattersy</string>
+    <string name="news_feed">Лента</string>
+    <string name="profile">Профиль</string>
+    <string name="settings">Настройки</string>
+    <string name="news_feed_placeholder">Экран новостной ленты</string>
+    <string name="user_name">Имя пользователя</string>
+    <string name="user_status">Статус</string>
+    <string name="name_label">Имя:</string>
+    <string name="status_label">Статус:</string>
+    <string name="theme_switch">Тёмная тема</string>
+    <string name="default_user_name">Пользователь</string>
+    <string name="default_user_status">В сети</string>
+</resources>
