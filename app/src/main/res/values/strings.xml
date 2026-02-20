@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">chattersy</string>
+    <string name="news_feed">Лента</string>
+    <string name="profile">Профиль</string>
+    <string name="settings">Настройки</string>
+    <string name="news_feed_placeholder">Экран новостной ленты</string>
+    <string name="user_name">Имя пользователя</string>
+    <string name="user_status">Статус</string>
+    <string name="name_label">Имя:</string>
+    <string name="status_label">Статус:</string>
+    <string name="theme_switch">Тёмная тема</string>
+    <string name="offline_mode">Офлайн режим</string>
+    <string name="default_user_name">Пользователь</string>
+    <string name="default_user_status">В сети</string>
+    <string name="user_avatar">Аватар пользователя</string>
+    <string name="like">Лайк</string>
+    <string name="refresh">Обновить</string>
+    <string name="error_offline_title">Нет соединения</string>
+    <string name="error_offline_message">Обновление не удалось. Приложение работает в офлайн режиме по сохранённым данным.</string>
+    <string name="error_force_offline_title">Офлайн режим включён</string>
+    <string name="error_force_offline_message">В Настройках включён переключатель «Офлайн режим». Выключите его, чтобы обновлять ленту из сети.</string>
+    <string name="error_timeout_title">Превышено время ожидания</string>
+    <string name="error_timeout_message">Сервер не ответил вовремя. Проверьте соединение и попробуйте снова.</string>
+    <string name="ok">OK</string>
+    <string name="notification_sync_title">Обновление ленты</string>
+    <string name="notification_sync_text">Новые данные получены</string>
+    <string name="notification_channel_name">Синхронизация</string>
+    <string name="notification_channel_id">chattersy_sync</string>
+    <string name="sync_success_toast">Данные обновлены</string>
+    <string name="sync_success_toast_no_permission">Данные обновлены. Разрешите уведомления в Настройках приложения, чтобы получать уведомления о новых данных.</string>
+    <string name="request_permissions">Запросить разрешения снова</string>
+    <string name="open_permission_settings">Открыть настройки разрешений</string>
+    <string name="contacts_count_label">Контактов: %d</string>
+    <string name="contacts_count_no_access">Контактов: нет доступа</string>
+    <string name="data_up_to_date">Данные актуальны</string>
+</resources>
