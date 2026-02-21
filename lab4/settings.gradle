@@ -1,0 +1,2 @@
+rootProject.name = "MessengerLab"
+include ':app'
