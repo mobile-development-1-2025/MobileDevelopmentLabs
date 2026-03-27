@@ -1,0 +1,12 @@
+<!-- MyMessenger/app/src/main/res/values/strings.xml -->
+<resources>
+    <string name="app_name">MyMessenger</string>
+    <string name="feed">Лента</string>
+    <string name="profile">Профиль</string>
+    <string name="settings">Настройки</string>
+
+    <string name="feed_stub">Это заглушка новостной ленты</string>
+    <string name="profile_name">Имя: Иван Иванов</string>
+    <string name="profile_email">Email: ivan@example.com</string>
+    <string name="theme_switch_label">Тёмная тема</string>
+</resources>
